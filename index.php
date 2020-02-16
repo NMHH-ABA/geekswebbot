@@ -19,12 +19,11 @@
 */
 require 'vendor/autoload.php';
 
-$client = new Zelenin\Telegram\Bot\Api(''); // Set your access token
-$url = ''; // URL RSS feed
+$client = new Zelenin\Telegram\Bot\Api('821293043:AAGV87SgJErV0yQm3np9uvZ3WXKvViX0E10'); // Set your access token
+$url = 'https://manotoapi.herokuapp.com'; // URL RSS feed
 $update = json_decode(file_get_contents('php://input'));
 
 //your app
-<?php
 include("Telegram.php");
 include_once('jdf.php');
 date_default_timezone_set("asia/tehran");
