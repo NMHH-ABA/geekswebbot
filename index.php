@@ -396,8 +396,9 @@ elseif (strstr($text, "s") == true)
     $showarrayMessage = json_decode($showrequest, true);
 
     $status = $showarrayMessage['status'];
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
+
     $showTitle = $showarrayMessage['details']['showTitle'];
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showTitle]);
     $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
     $showShortDescription = $showarrayMessage['details']['showShortDescription'];
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
