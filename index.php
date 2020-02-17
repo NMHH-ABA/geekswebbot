@@ -407,9 +407,10 @@ elseif (strstr($text, "s") == true)
     $Description3 = str_replace("&zwnj;", " ", $Description2);
     $Description4 = str_replace("&raquo;", " ", $Description3);
     $Description5 = str_replace("&nbsp;", " ", $Description4);
-    $Description = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
+    $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
+    $Description = ($Description6 . "<a href=" . $showoverlayImgIxUrl . "></a>");
 
-    $telegram->sendMessage(['chat_id' => $chat_id,'parse_mode' => 'html', 'text' => $Description'<a href='$showoverlayImgIxUrl'></a>',]);
+    $telegram->sendMessage(['chat_id' => $chat_id,'parse_mode' => 'html', 'text' => $Description,]);
 
     $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
     $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
