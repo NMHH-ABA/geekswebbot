@@ -404,13 +404,14 @@ elseif (strstr($text, "s") == true)
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showSynopsis]);
     $Description1 = strip_tags($showSynopsis);
-    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description1]);
+    $Description = urlencode($Description1);
+    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description]);
     $Description2 = str_replace("&laquo;", "", $Description1);
     $Description3 = str_replace("&zwnj;", " ", $Description2);
     $Description4 = str_replace("&raquo;", "", $Description3);
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-    $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+    $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
     
 
