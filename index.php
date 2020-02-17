@@ -2,14 +2,14 @@
 include 'vendor/autoload.php';
 include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
-
-$telegram = new Zelenin\Telegram\Bot\Api('821293043:AAGV87SgJErV0yQm3np9uvZ3WXKvViX0E10'); // Set your access token
-$update = json_decode(file_get_contents('php://input'));
-$chat_id = $update->message->chat->id;
-$textoriginal = $update->message->text;
+$bot_id = "821293043:AAGV87SgJErV0yQm3np9uvZ3WXKvViX0E10";
+$telegram = new Telegram($bot_id);
+$textoriginal = $telegram->Text();
+$chat_id = $telegram->ChatID(); 
 $text = strtolower($textoriginal);
 
 //your app
+
 if($text == '/start')
     {
 
@@ -18,7 +18,7 @@ if($text == '/start')
             'text' => "Bot is Online!"
         ]);
     }
-    else
+else
     {
         $response = $telegram->sendMessage([
             'chat_id' => $chat_id,
