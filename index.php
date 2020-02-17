@@ -145,7 +145,7 @@ if ($callback_query !== null && $callback_query != '')
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
 
     $status = $showarrayMessage['status'];
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $SID0]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
     if ($status == "1")
     {
         $Description1 = strip_tags($showSynopsis);
