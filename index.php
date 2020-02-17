@@ -2,6 +2,7 @@
 include 'vendor/autoload.php';
 include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
+date_default_timezone_set("asia/tehran");
 // Set the bot TOKEN
 $bot_id = "821293043:AAGV87SgJErV0yQm3np9uvZ3WXKvViX0E10";
 // Instances the class
