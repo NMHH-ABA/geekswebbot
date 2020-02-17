@@ -395,7 +395,7 @@ elseif (strstr($text, "s") == true)
     $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $getshowid[1];
     $showrequest = file_get_contents($showurl);
     $showarrayMessage = json_decode($showrequest, true);
-
+$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
     $status = $showarrayMessage['status'];
         $showTitle = $showarrayMessage['details']['showTitle'];
         $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
