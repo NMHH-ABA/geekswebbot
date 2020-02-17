@@ -139,15 +139,15 @@ if ($callback_query !== null && $callback_query != '')
     $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $SID0;
     $showrequest = file_get_contents($showurl);
     $showarrayMessage = json_decode($showrequest, true);
-    $showTitle = $showarrayMessage['details']['showTitle'];
-    $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
-    $showShortDescription = $showarrayMessage['details']['showShortDescription'];
-    $showSynopsis = $showarrayMessage['details']['showSynopsis'];
 
     $status = $showarrayMessage['status'];
     
     if ($status == "1")
     {
+        $showTitle = $showarrayMessage['details']['showTitle'];
+        $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
+        $showShortDescription = $showarrayMessage['details']['showShortDescription'];
+        $showSynopsis = $showarrayMessage['details']['showSynopsis'];
         $Description1 = strip_tags($showSynopsis);
         $Description2 = str_replace("&laquo;", "", $Description1);
         $Description3 = str_replace("&zwnj;", " ", $Description2);
@@ -155,10 +155,8 @@ if ($callback_query !== null && $callback_query != '')
         $Description5 = str_replace("&nbsp;", " ", $Description4);
         $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
         $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
-        $Description8 = urlencode($Description7);
         
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description8]);
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
     }
     if ($status == "0")
     {
