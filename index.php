@@ -10,7 +10,7 @@ try {
 
     if($update->message->text == '/start')
     {
-    	$response = $telegram->sendChatAction(['chat_id' => $chat_id, 'action' => 'typing']);
+
     	$response = $telegram->sendMessage([
         	'chat_id' => $chat_id,
         	'text' => "Bot is Online!"
@@ -18,16 +18,10 @@ try {
     }
     else
     {
-    	$response = $telegram->sendChatAction(['chat_id' => $chat_id, 'action' => 'typing']);
     	$response = $telegram->sendMessage([
     		'chat_id' => $chat_id,
     		'text' => "Invalid command"
     		]);
     }
-
-} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
-
-    //echo error message ot log it
-    //echo $e->getMessage();
 
 }
