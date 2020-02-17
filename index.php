@@ -390,12 +390,13 @@ elseif (strstr($text, "e") == true)
 
 elseif (strstr($text, "s") == true)
 {
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "hi"]);
     $getshowid = explode("s", $text, 2);
     $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $getshowid[1];
     $showrequest = file_get_contents($showurl);
     $showarrayMessage = json_decode($showrequest, true);
 
-
+    $status = $showarrayMessage['status'];
         $showTitle = $showarrayMessage['details']['showTitle'];
         $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
         $showShortDescription = $showarrayMessage['details']['showShortDescription'];
@@ -409,7 +410,6 @@ elseif (strstr($text, "s") == true)
         $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
 
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "hi"]);
 
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description]);
 
@@ -464,7 +464,6 @@ elseif (strstr($text, "s") == true)
         $epsodelistcaption2 = ($epsodelistformattedShowTitle2 . " " . $formattedepsodelistTitle2 . "\n" . $epsodelistTitle2 . "\n" . $epsodelistgetShowon2 . "\nhttps://www.manototv.com/episode/" . $epsodelistid2);
 
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $epsodelistlandscapeImgIxUrl2, 'caption' => $epsodelistcaption2]);
-    
 }
 
 elseif (strstr($text, "-") == true)
