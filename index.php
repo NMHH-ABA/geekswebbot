@@ -394,7 +394,9 @@ elseif (strstr($text, "s") == true)
     $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $getshowid[1];
     $showrequest = file_get_contents($showurl);
     $showarrayMessage = json_decode($showrequest, true);
+
     $status = $showarrayMessage['status'];
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
     $showTitle = $showarrayMessage['details']['showTitle'];
     $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
     $showShortDescription = $showarrayMessage['details']['showShortDescription'];
@@ -406,8 +408,9 @@ elseif (strstr($text, "s") == true)
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
     $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
+    
 
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
 
