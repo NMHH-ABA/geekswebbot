@@ -409,12 +409,7 @@ elseif (strstr($text, "s") == true)
     $Description4 = str_replace("&raquo;", " ", $Description3);
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-
-    $count = mb_strlen($Description6);
-    if (($count < 1024) == true)
-    {
-    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description6]); 
-    }
+    
 
     $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
     $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
