@@ -141,7 +141,7 @@ if ($callback_query !== null && $callback_query != '')
     $showarrayMessage = json_decode($showrequest, true);
 
     $status = $showarrayMessage['status'];
-    
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
     if ($status == "1")
     {
         $showTitle = $showarrayMessage['details']['showTitle'];
@@ -159,7 +159,7 @@ if ($callback_query !== null && $callback_query != '')
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
 
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $SID0]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "test"]);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showTitle]);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
