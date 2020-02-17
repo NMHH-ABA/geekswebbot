@@ -399,8 +399,7 @@ elseif (strstr($text, "s") == true)
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
 
     $status = $showarrayMessage['status'];
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
+
     if ($status == "1")
     {
         $Description1 = strip_tags($showSynopsis);
@@ -410,6 +409,9 @@ elseif (strstr($text, "s") == true)
         $Description5 = str_replace("&nbsp;", " ", $Description4);
         $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
         $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description7]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
 
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
 
