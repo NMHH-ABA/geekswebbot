@@ -141,7 +141,7 @@ if ($callback_query !== null && $callback_query != '')
     $showarrayMessage = json_decode($showrequest, true);
 
     $status = $showarrayMessage['status'];
-    
+
     if ($status == "1")
     {
         $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $SID0;
@@ -399,7 +399,8 @@ elseif (strstr($text, "s") == true)
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
 
     $status = $showarrayMessage['status'];
-
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
     if ($status == "1")
     {
         $Description1 = strip_tags($showSynopsis);
