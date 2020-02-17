@@ -396,8 +396,12 @@ elseif (strstr($text, "s") == true)
     $showarrayMessage = json_decode($showrequest, true);
 
     $status = $showarrayMessage['status'];
-
-    if (($status == "1") == true)
+    if ($status == "0")
+    {
+        $error = $showarrayMessage['errors']['0']['messageCode'];
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $error . " ShowID"]);
+    }
+    else
     {
         $showTitle = $showarrayMessage['details']['showTitle'];
         $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
@@ -467,12 +471,6 @@ elseif (strstr($text, "s") == true)
         $epsodelistcaption2 = ($epsodelistformattedShowTitle2 . " " . $formattedepsodelistTitle2 . "\n" . $epsodelistTitle2 . "\n" . $epsodelistgetShowon2 . "\nhttps://www.manototv.com/episode/" . $epsodelistid2);
 
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $epsodelistlandscapeImgIxUrl2, 'caption' => $epsodelistcaption2]);
-    }
-
-    if ($status == "0")
-    {
-        $error = $showarrayMessage['errors']['0']['messageCode'];
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $error . " ShowID"]);
     }
 }
 
