@@ -390,29 +390,28 @@ elseif (strstr($text, "e") == true)
 
 elseif (strstr($text, "s") == true)
 {
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "hi"]);
     $getshowid = explode("s", $text, 2);
     $showurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $getshowid[1];
     $showrequest = file_get_contents($showurl);
     $showarrayMessage = json_decode($showrequest, true);
     $status = $showarrayMessage['status'];
-        $showTitle = $showarrayMessage['details']['showTitle'];
-        $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
-        $showShortDescription = $showarrayMessage['details']['showShortDescription'];
-        $showSynopsis = $showarrayMessage['details']['showSynopsis'];
-        $Description1 = strip_tags($showSynopsis);
-        $Description2 = str_replace("&laquo;", "", $Description1);
-        $Description3 = str_replace("&zwnj;", " ", $Description2);
-        $Description4 = str_replace("&raquo;", "", $Description3);
-        $Description5 = str_replace("&nbsp;", " ", $Description4);
-        $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-        $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
+    $showTitle = $showarrayMessage['details']['showTitle'];
+    $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
+    $showShortDescription = $showarrayMessage['details']['showShortDescription'];
+    $showSynopsis = $showarrayMessage['details']['showSynopsis'];
+    $Description1 = strip_tags($showSynopsis);
+    $Description2 = str_replace("&laquo;", "", $Description1);
+    $Description3 = str_replace("&zwnj;", " ", $Description2);
+    $Description4 = str_replace("&raquo;", "", $Description3);
+    $Description5 = str_replace("&nbsp;", " ", $Description4);
+    $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
+    $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
 
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
 
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description]);
+    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description]);
 
         $serieurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/serieslist?id=" . $getshowid[1];
         $serierequests = file_get_contents($serieurl);
