@@ -164,6 +164,7 @@ if ($callback_query !== null && $callback_query != '')
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showTitle]);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description7]);
+    }
 
     if ($status == "0")
     {
@@ -651,5 +652,3 @@ else
 {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Invalid Input"]);
 }
-
-#$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "test"]);
