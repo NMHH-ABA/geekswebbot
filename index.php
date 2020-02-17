@@ -10,7 +10,10 @@ $textoriginal = $update->message->text;
 $text = strtolower($textoriginal);
 
 //your app
- if($text == '/start')
+try 
+{
+
+    if($text == '/start')
     {
 
         $response = $telegram->sendMessage([
@@ -25,3 +28,11 @@ $text = strtolower($textoriginal);
             'text' => "Invalid command"
             ]);
     }
+} 
+
+catch (\Zelenin\Telegram\Bot\NotOkException $e) {
+
+    //echo error message ot log it
+    //echo $e->getMessage();
+
+}
