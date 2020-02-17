@@ -158,7 +158,7 @@ if ($callback_query !== null && $callback_query != '')
         $Description8 = urlencode($Description7);
         
         $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description8]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "hhhjksbsvbksv"]);
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
     }
     if ($status == "0")
     {
