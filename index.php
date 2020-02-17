@@ -409,15 +409,8 @@ elseif (strstr($text, "s") == true)
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
 
-    $count = mb_strlen($Description6);
-    if (($count < 1024) == true)
-    {
-    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description6]); 
-    }
-
-    $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
-    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
+    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description6]);
 
         $serieurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/serieslist?id=" . $getshowid[1];
         $serierequests = file_get_contents($serieurl);
