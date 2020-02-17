@@ -155,9 +155,9 @@ if ($callback_query !== null && $callback_query != '')
         $Description5 = str_replace("&nbsp;", " ", $Description4);
         $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
         $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
-
-        $hhhjksbsvbksv = $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
-
+        
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
+        $hhhjksbsvbksv = ($chat_id . $showoverlayImgIxUrl . $Description7);
         $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $hhhjksbsvbksv]);
     }
     if ($status == "0")
