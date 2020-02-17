@@ -407,7 +407,7 @@ elseif (strstr($text, "s") == true)
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
     $Description = mb_substr($Description6 , 0 , 1024 , "UTF-8");
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
 
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
 
