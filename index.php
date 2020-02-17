@@ -397,7 +397,7 @@ elseif (strstr($text, "s") == true)
 
     $status = $showarrayMessage['status'];
 
-    if ($status == "1")
+    if ($status = "1")
     {
         $showTitle = $showarrayMessage['details']['showTitle'];
         $showoverlayImgIxUrl = $showarrayMessage['details']['overlayImgIxUrl'];
