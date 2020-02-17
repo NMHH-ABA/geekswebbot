@@ -13,15 +13,9 @@ $text = strtolower($textoriginal);
 if($text == '/start')
     {
 
-        $response = $telegram->sendMessage([
-            'chat_id' => $chat_id,
-            'text' => "Bot is Online!"
-        ]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Bot is Online!"]);
     }
 else
     {
-        $response = $telegram->sendMessage([
-            'chat_id' => $chat_id,
-            'text' => "Invalid command"
-            ]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Invalid command"]);
     }
