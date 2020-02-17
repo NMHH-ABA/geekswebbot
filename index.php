@@ -29,9 +29,10 @@ $callback_query   = $telegram->Callback_Query();
 $callback_chat_id = $telegram->Callback_ChatID();
 
 //your app
-
-if ($callback_query !== null && $callback_query != '') 
-{
+try {
+    
+    if ($callback_query !== null && $callback_query != '') 
+    {
 
     if ($callback_data == "lastid0")
     {
@@ -646,5 +647,4 @@ else
 {
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "Invalid Input"]);
 }
-
-#$telegram->sendMessage(['chat_id' => $chat_id, 'text' => "test"]);
+}
