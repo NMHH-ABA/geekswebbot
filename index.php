@@ -404,6 +404,7 @@ elseif (strstr($text, "s") == true)
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showSynopsis]);
     $Description1 = strip_tags($showSynopsis);
+    $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description1]);
     $Description2 = str_replace("&laquo;", "", $Description1);
     $Description3 = str_replace("&zwnj;", " ", $Description2);
     $Description4 = str_replace("&raquo;", "", $Description3);
