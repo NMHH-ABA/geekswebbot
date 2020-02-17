@@ -145,7 +145,7 @@ if ($callback_query !== null && $callback_query != '')
     $showSynopsis = $showarrayMessage['details']['showSynopsis'];
 
     $status = $showarrayMessage['status'];
-
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $SID0]);
     if ($status == "1")
     {
         $Description1 = strip_tags($showSynopsis);
@@ -341,7 +341,7 @@ elseif ($text == '/last')
 
 
 }
-elseif (strstr($text, "e") or strstr($EID, "e") == true)
+elseif (strstr($text, "e") == true)
 {
     $getepisodeid = explode("e", $text, 2);
     $episodeurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/episodedetails?id=" . $getepisodeid[1];
