@@ -156,17 +156,10 @@ if ($callback_query !== null && $callback_query != '')
         $Description3 = str_replace("&zwnj;", " ", $Description2);
         $Description4 = str_replace("&raquo;", "", $Description3);
         $Description5 = str_replace("&nbsp;", " ", $Description4);
-        $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-        $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+        $Description = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
         
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
-
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $SID0]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "test"]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showTitle]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showoverlayImgIxUrl]);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description7]);
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
     }
 
     if ($status == "0")
@@ -195,10 +188,10 @@ if ($callback_query !== null && $callback_query != '')
         $Description3 = str_replace("&zwnj;", " ", $Description2);
         $Description4 = str_replace("&raquo;", "", $Description3);
         $Description5 = str_replace("&nbsp;", " ", $Description4);
-        $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-        $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
+        $Description = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
 
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
     }
     if ($status == "0")
     {
@@ -226,10 +219,10 @@ if ($callback_query !== null && $callback_query != '')
         $Description3 = str_replace("&zwnj;", " ", $Description2);
         $Description4 = str_replace("&raquo;", "", $Description3);
         $Description5 = str_replace("&nbsp;", " ", $Description4);
-        $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-        $Description7 = mb_substr($Description6 , 0 , 1024 , "UTF-8");
-
-        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description7]);
+        $Description = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
+        
+        $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description]);
     }
     if ($status == "0")
     {
@@ -408,7 +401,7 @@ elseif (strstr($text, "s") == true)
     $Description4 = str_replace("&raquo;", " ", $Description3);
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description6 = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
-
+$telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl, 'caption' => $Description6]);
     $telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $showoverlayImgIxUrl]);
     $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Description6]);
 
