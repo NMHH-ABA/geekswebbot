@@ -409,13 +409,8 @@ elseif (strstr($text, "s") == true)
     $Description5 = str_replace("&nbsp;", " ", $Description4);
     $Description = ($showTitle . "\n" . $showShortDescription . "\n" . $Description5);
 
-    $content = [
-            'chat_id'    => $chat_id,
-                'parse_mode' => 'html',
-                    'text'       => " $Description
-                     <a href="$showoverlayImgIxUrl"> </a>",
-                        ];
-                        $telegram->sendMessage($content);
+    $content = ;
+                        $telegram->sendMessage(['chat_id' => $chat_id, 'parse_mode' => 'html','text' => $Description "<a href="$showoverlayImgIxUrl"></a>",];
 
 
 
