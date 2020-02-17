@@ -141,7 +141,7 @@ if ($callback_query !== null && $callback_query != '')
     $showarrayMessage = json_decode($showrequest, true);
 
     $status = $showarrayMessage['status'];
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $showurl]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $status]);
     if ($status == "1")
     {
         $showTitle = $showarrayMessage['details']['showTitle'];
