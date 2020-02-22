@@ -4,7 +4,7 @@ include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
 date_default_timezone_set("asia/tehran");
 // Set the bot TOKEN
-$bot_id = "821293043:AAEbI2IUa0wm7oKoGk-DPsRh4U3i1nGRHHQ";
+$bot_id = "436243035:AAHoZhqLSlMa0Aku0iqftijx7gOFjbiwcas";
 // Instances the class
 $telegram = new Telegram($bot_id);
 $textoriginal = $telegram->Text();
