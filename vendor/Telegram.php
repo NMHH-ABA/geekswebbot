@@ -684,11 +684,31 @@ class Telegram
      * \param $content the request parameters as array
      * \return the JSON Telegram's reply.
      */
+    public function callbackurlepisode()
+    {
+        return $this->data['callback_query']['message']['reply_markup']['inline_keyboard']['0']['1']['url'];
+    }
+    /// Send callbackurl
+    public function getcallback()
+    {
+        return $this->data['callback_query']['message']['reply_markup']['inline_keyboard'];
+    }
+    /// Send callbackurl
+    public function callbackurlshow()
+    {
+        return $this->data['callback_query']['message']['reply_markup']['inline_keyboard']['0']['0']['url'];
+    }
+    /// Send callbackurl
     public function sendVoice(array $content)
     {
         return $this->endpoint('sendVoice', $content);
     }
-
+    /// Get photo file_id of current message
+    public function photoFileID()
+    {
+        if ($this->getUpdateType() == 'photo')
+            return $this->data["message"]["photo"][0]["file_id"];
+    }
     /// Send a location
 
     /**
