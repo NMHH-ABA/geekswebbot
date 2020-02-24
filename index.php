@@ -3,8 +3,8 @@ require 'vendor/autoload.php';
 $client = new Zelenin\Telegram\Bot\Api('69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg'); // Set your access token
 $url = 'https://t.me/BachehayeManotoBot'; // URL RSS feed
 #000webhost
-include 'Telegram.php';
-include_once 'jdf.php';
+include 'vendor/Telegram.php';
+include_once 'vendor/jdf.php';
 date_default_timezone_set("asia/tehran");
 // Set the bot TOKEN
 $bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg";
