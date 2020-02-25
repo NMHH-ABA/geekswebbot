@@ -1,15 +1,40 @@
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>VideoJS HLS</title>
+<html>
+<head>
+	<!--بجای فیلترینگ و پارازیت، به فکر بهبود زیرساخت کشور کنید تا از علم و فناوری ۱۰سال از باقی کشورهای دنیا عقب نباشیم.-->
+	<meta charset="UTF-8">
+	<meta property="fb:app_id"	content="1006528419368987" />
+	<title>من‌و‌تو بدون فیلتر و پارازیت</title>
+	<meta name="title" content="پخش زنده شبکه‌ی من و تو"/>
+	<meta name="description" content="پخش زنده"/>
+	<!-- og -->
+	<meta property="og:title" content="من‌و‌تو بدون فیلتر و پارازیت"/>
+	<meta property="og:description" content="پخش زنده"/>
+	<meta property="og:site_name" content="@BachehayeManoto"/>
+	<meta property="og:url" content="https://manotolive.herokuapp.com"/>
+	<meta property="og:type" content="video.other"/>
+	<meta property="og:image" content="https://d2qp0g8kvgiu1w.cloudfront.net/cover_iran.jpg"/>
+	<meta property="og:image:secure_url" content="https://d2qp0g8kvgiu1w.cloudfront.net/cover_iran.jpg"/>
+	<meta property="og:video" content="https://d2rwmwucnr0d10.cloudfront.net/live.m3u8" />
+	<meta property="og:video:secure_url" content="https://d2rwmwucnr0d10.cloudfront.net/live.m3u8" />
+	<meta property="og:video:type" content="video/mp4"/>
+	<meta property="og:video:width" content="640" />
+	<meta property="og:video:height" content="360" />
+	<!-- tw -->
+	<meta name="twitter:card" content="player"/>
+	<meta name="twitter:site" content="@BachehayeManoto"/>
+	<meta name="twitter:title" content="کانال من و تو"/>
+	<meta name="twitter:description" content="پخش زنده"/>
+	<meta name="twitter:image" content="https://d2qp0g8kvgiu1w.cloudfront.net/cover_iran.jpg"/>
+	<meta name="twitter:image:width" content="400"/>
+	<meta name="twitter:image:height" content="225"/>
+	<meta name="twitter:player" content="https://manotolive.herokuapp.com"/>
+	<meta name="twitter:player:width" content="640"/>
+	<meta name="twitter:player:height" content="360"/>
+	<meta name="twitter:player:stream"  content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="content-language" content="fa" />
+</head>
 
     <!-- Bootstrap core CSS. This is just to make the demo look
     nice. It's not required for videojs-contrib-hls to work. -->
@@ -60,7 +85,7 @@
     
         
       <section class="starter-template">
-        <h1>پخش زنده بدون فیلتر من وتو</h1>
+        <h1>پخش زنده بدون فیلتر من و تو</h1>
      
         <!--
           -- Your video element. Just like regular HTML5 video.
@@ -122,3 +147,4 @@
     </script>
   </body>
 </html>
+
