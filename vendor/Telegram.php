@@ -1872,7 +1872,15 @@ class Telegram
     {
         return $this->data['inline_query'];
     }
+    public function Inline_Query_ID()
+    {
+        return $this->data['inline_query']['id'];
+    }
 
+    public function Inline_Query_Text()
+    {
+        return $this->data['inline_query']['query'];
+    }
     /// Get the callback_query of the current update
 
     /**
