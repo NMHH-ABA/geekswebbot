@@ -849,18 +849,18 @@ elseif (stristr($text, 'showsid') == true) {
         }
     }
     else
-        {
+    {
         if ($tedadserie == 1)
         {
-        $option = [
-            [
-                $telegram->buildInlineKeyBoardButton("دیدن در سایت", $url = "https://www.manototv.com/show/" . $getshowid[0]),
-                $telegram->buildInlineKeyBoardButton('توضیحات', $url = '', $callback_data = "showdetail"),
-            ],
-            [
-                $telegram->buildInlineKeyBoardButton("$serieTitle[0]", $url = '', $callback_data = "Serielist" . $serieID[0]),
-            ],
-        ];
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton("دیدن در سایت", $url = "https://www.manototv.com/show/" . $getshowid[0]),
+                    $telegram->buildInlineKeyBoardButton('توضیحات', $url = '', $callback_data = "showdetail"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[0]", $url = '', $callback_data = "Serielist" . $serieID[0]),
+                ],
+            ];
         }
         elseif ($tedadserie == 2)
         {
@@ -967,26 +967,26 @@ elseif (stristr($text, 'showsid') == true) {
         }
         elseif ($tedadserie == 8)
         {
-        $option = [
-            [
-                $telegram->buildInlineKeyBoardButton("دیدن در سایت", $url = "https://www.manototv.com/show/" . $getshowid[0]),
-                $telegram->buildInlineKeyBoardButton('توضیحات', $url = '', $callback_data = "showdetail"),
-            ],
-            [
-                $telegram->buildInlineKeyBoardButton("$serieTitle[6]", $url = '', $callback_data = "Serielist" . $serieID[6]),
-                $telegram->buildInlineKeyBoardButton("$serieTitle[7]", $url = '', $callback_data = "Serielist" . $serieID[7]),
-            ],
-            [
-                $telegram->buildInlineKeyBoardButton("$serieTitle[3]", $url = '', $callback_data = "Serielist" . $serieID[3]),
-                $telegram->buildInlineKeyBoardButton("$serieTitle[4]", $url = '', $callback_data = "Serielist" . $serieID[4]),
-                $telegram->buildInlineKeyBoardButton("$serieTitle[5]", $url = '', $callback_data = "Serielist" . $serieID[5]),
-            ],
-            [
-                $telegram->buildInlineKeyBoardButton("$serieTitle[0]", $url = '', $callback_data = "Serielist" . $serieID[0]),
-                $telegram->buildInlineKeyBoardButton("$serieTitle[1]", $url = '', $callback_data = "Serielist" . $serieID[1]),
-                $telegram->buildInlineKeyBoardButton("$serieTitle[2]", $url = '', $callback_data = "Serielist" . $serieID[2]),
-            ],
-        ];
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton("دیدن در سایت", $url = "https://www.manototv.com/show/" . $getshowid[0]),
+                    $telegram->buildInlineKeyBoardButton('توضیحات', $url = '', $callback_data = "showdetail"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[6]", $url = '', $callback_data = "Serielist" . $serieID[6]),
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[7]", $url = '', $callback_data = "Serielist" . $serieID[7]),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[3]", $url = '', $callback_data = "Serielist" . $serieID[3]),
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[4]", $url = '', $callback_data = "Serielist" . $serieID[4]),
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[5]", $url = '', $callback_data = "Serielist" . $serieID[5]),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[0]", $url = '', $callback_data = "Serielist" . $serieID[0]),
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[1]", $url = '', $callback_data = "Serielist" . $serieID[1]),
+                    $telegram->buildInlineKeyBoardButton("$serieTitle[2]", $url = '', $callback_data = "Serielist" . $serieID[2]),
+                ],
+            ];
         }
         elseif ($tedadserie >= 9)
         {
@@ -1012,7 +1012,7 @@ elseif (stristr($text, 'showsid') == true) {
                 ],
             ];
         }
-        }
+    }
     $keyb = $telegram->buildInlineKeyBoard($option);
     $telegram->sendPhoto(['chat_id' => $chat_id, 'reply_markup' => $keyb, 'photo' => $showoverlayImgIxUrl, 'caption' => $caption, 'reply_to_message_id' => $callbackmessage_id, 'parse_mode' => 'HTML']);
 }
@@ -1080,651 +1080,651 @@ elseif (stristr($text, 'serielist') == true)
         ];
     }
     else
+    {
+        for ($p = 0; $p < $countepisode; $p++)
         {
-            for ($p = 0; $p < $countepisode; $p++)
-            {
-                $EPTitle[] = $episodelistarrayMessage['details']['list'][$p]['episodeNumber'];
-                $EPID[] = $episodelistarrayMessage['details']['list'][$p]['id'];
-                $formattedEpisodeTitle[] = $episodelistarrayMessage['details']['list'][$p]['formattedEpisodeTitle'];
-            }
-
-            if ($countepisode == 1)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 2)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 3)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 4)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 5)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 6)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 7)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 8)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 9)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 10)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 11)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 12)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 13)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 14)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 15)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 16)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 17)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 18)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 19)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 20)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 21)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 22)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode == 23)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[22]) $formattedEpisodeTitle[22]" , $url = "", $callback_data ="ephls$EPID[22]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
-            elseif ($countepisode >= 24)
-            {
-                $option = [
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[22]) $formattedEpisodeTitle[22]" , $url = "", $callback_data ="ephls$EPID[22]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[23]) $formattedEpisodeTitle[23]" , $url = "", $callback_data ="ephls$EPID[23]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
-                    ],
-                    [
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
-                        $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
-                    ],
-                ];
-            }
+            $EPTitle[] = $episodelistarrayMessage['details']['list'][$p]['episodeNumber'];
+            $EPID[] = $episodelistarrayMessage['details']['list'][$p]['id'];
+            $formattedEpisodeTitle[] = $episodelistarrayMessage['details']['list'][$p]['formattedEpisodeTitle'];
         }
+
+        if ($countepisode == 1)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 2)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 3)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 4)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 5)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 6)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 7)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 8)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 9)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 10)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 11)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 12)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 13)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 14)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 15)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 16)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 17)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 18)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 19)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 20)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 21)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 22)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode == 23)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[22]) $formattedEpisodeTitle[22]" , $url = "", $callback_data ="ephls$EPID[22]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+        elseif ($countepisode >= 24)
+        {
+            $option = [
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[21]) $formattedEpisodeTitle[21]" , $url = "", $callback_data ="ephls$EPID[21]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[22]) $formattedEpisodeTitle[22]" , $url = "", $callback_data ="ephls$EPID[22]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[23]) $formattedEpisodeTitle[23]" , $url = "", $callback_data ="ephls$EPID[23]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[18]) $formattedEpisodeTitle[18]" , $url = "", $callback_data ="ephls$EPID[18]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[19]) $formattedEpisodeTitle[19]" , $url = "", $callback_data ="ephls$EPID[19]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[20]) $formattedEpisodeTitle[20]" , $url = "", $callback_data ="ephls$EPID[20]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[15]) $formattedEpisodeTitle[15]" , $url = "", $callback_data ="ephls$EPID[15]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[16]) $formattedEpisodeTitle[16]" , $url = "", $callback_data ="ephls$EPID[16]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[17]) $formattedEpisodeTitle[17]" , $url = "", $callback_data ="ephls$EPID[17]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[12]) $formattedEpisodeTitle[12]" , $url = "", $callback_data ="ephls$EPID[12]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[13]) $formattedEpisodeTitle[13]" , $url = "", $callback_data ="ephls$EPID[13]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[14]) $formattedEpisodeTitle[14]" , $url = "", $callback_data ="ephls$EPID[14]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[9]) $formattedEpisodeTitle[9]" , $url = "", $callback_data ="ephls$EPID[9]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[10]) $formattedEpisodeTitle[10]" , $url = "", $callback_data ="ephls$EPID[10]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[11]) $formattedEpisodeTitle[11]" , $url = "", $callback_data ="ephls$EPID[11]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "", $callback_data ="ephls$EPID[6]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[7]) $formattedEpisodeTitle[7]" , $url = "", $callback_data ="ephls$EPID[7]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[8]) $formattedEpisodeTitle[8]" , $url = "", $callback_data ="ephls$EPID[8]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "", $callback_data ="ephls$EPID[3]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "", $callback_data ="ephls$EPID[4]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "", $callback_data ="ephls$EPID[5]"),
+                ],
+                [
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "", $callback_data ="ephls$EPID[0]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "", $callback_data ="ephls$EPID[1]"),
+                    $telegram->buildInlineKeyBoardButton( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "", $callback_data ="ephls$EPID[2]"),
+                ],
+            ];
+        }
+    }
 
     $keyb = $telegram->buildInlineKeyBoard($option);
     $telegram->sendMessage(['chat_id' => $chat_id, 'reply_to_message_id' => $callbackmessage_id, 'reply_markup' => ($keyb), "text" => "قسمت موردنظر رو انتخاب کنید"]);
@@ -2150,7 +2150,7 @@ elseif (strstr($text, "vthls") == true) {
             $telegram->buildInlineKeyBoardButton("دیدن در سایت", $url = "https://www.manototv.com/clip/" . $getepisodeid[1]),
         ],
         [
-           $telegram->buildInlineKeyBoardButton('دانلود', $url = '', $callback_data = "file=clip=" . $getepisodeid[1]),
+            $telegram->buildInlineKeyBoardButton('دانلود', $url = '', $callback_data = "file=clip=" . $getepisodeid[1]),
         ],
     ];
 
@@ -2407,38 +2407,38 @@ elseif ($msgType == 'photo') {
     }
 }
 elseif($msgType == 'inline_query')
+{
+    if(!empty($inline_query_text))
     {
-        if(!empty($inline_query_text))
+        if($inline_query_text == "l")
         {
-            if($inline_query_text == "l")
-            {
-                $results = [];
-                $p = 0;
-                $url = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/homemodule/catchupepsiodes";
-                $request = file_get_contents($url);
-                $arrayMessage = json_decode($request, true);
-                for ($p = 0; $p <= 19; $p++) {
-                    $episodeDateUTC = $arrayMessage['details']['list'][$p]['episodeDateUTC'];
-                    $getdate1 = explode("T", $episodeDateUTC, 2);
-                    $getdate2 = explode("-", $getdate1[0], 3);
-                    $showtime = gregorian_to_jalali($getdate2[0], $getdate2[1], $getdate2[2], '-');
-                    $showtimefa = tr_num($showtime, 'fa');
-                    $showon = explode("-", $showtimefa, 3);
-                    $Pakhsh = "زمان پخش " . $showon[2] . " " . $showon[1] . " " . $showon[0];
-                    $results[] = [
-                        'type' => 'article',
-                        'id' => base64_encode(rand()),
-                        'title' =>  $arrayMessage['details']['list'][$p]['formattedEpisodeTitle'],
-                        'message_text' =>  "ephls" . $arrayMessage['details']['list'][$p]['id'],
-                        'description' =>  $Pakhsh,
-                        'thumb_url' => $arrayMessage['details']['list'][$p]['landscapeImgIxUrl'],
-                    ];
-                }
-                $telegram->answerInlineQuery(['inline_query_id' => $inline_query_id, 'results' => json_encode($results)]);
+            $results = [];
+            $p = 0;
+            $url = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/homemodule/catchupepsiodes";
+            $request = file_get_contents($url);
+            $arrayMessage = json_decode($request, true);
+            for ($p = 0; $p <= 19; $p++) {
+                $episodeDateUTC = $arrayMessage['details']['list'][$p]['episodeDateUTC'];
+                $getdate1 = explode("T", $episodeDateUTC, 2);
+                $getdate2 = explode("-", $getdate1[0], 3);
+                $showtime = gregorian_to_jalali($getdate2[0], $getdate2[1], $getdate2[2], '-');
+                $showtimefa = tr_num($showtime, 'fa');
+                $showon = explode("-", $showtimefa, 3);
+                $Pakhsh = "زمان پخش " . $showon[2] . " " . $showon[1] . " " . $showon[0];
+                $results[] = [
+                    'type' => 'article',
+                    'id' => base64_encode(rand()),
+                    'title' =>  $arrayMessage['details']['list'][$p]['formattedEpisodeTitle'],
+                    'message_text' =>  "ephls" . $arrayMessage['details']['list'][$p]['id'],
+                    'description' =>  $Pakhsh,
+                    'thumb_url' => $arrayMessage['details']['list'][$p]['landscapeImgIxUrl'],
+                ];
             }
-            else
+            $telegram->answerInlineQuery(['inline_query_id' => $inline_query_id, 'results' => json_encode($results)]);
+        }
+        else
         {
-        $ENDATE = date("Y-m-d");
+            $ENDATE = date("Y-m-d");
             $timeinput = explode(" ", $inline_query_text, 2);
             $HO = $timeinput[0];
             $MI = $timeinput[1];
@@ -2492,8 +2492,8 @@ elseif($msgType == 'inline_query')
             ];
             $telegram->answerInlineQuery(['inline_query_id' => $inline_query_id, 'results' => json_encode($results)]);
         }
-        }
     }
+}
 else
 {
     $one = "1";
