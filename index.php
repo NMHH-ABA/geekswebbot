@@ -4,7 +4,7 @@ include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
 date_default_timezone_set("asia/tehran");
 // Set the bot TOKEN
-$bot_id = "1279873723:AAEjyOf7og7FWiK0IAXJ9vyPqqwItv-6HEs";
+$bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg";
 // Instances the class
 $telegram = new Telegram($bot_id);
 $textoriginal = $telegram->Text();
@@ -2210,7 +2210,7 @@ elseif (strstr($text, "ephls") == true) {
 
         $keyb = $telegram->buildInlineKeyBoard($option);
         $telegram->sendPhoto(['chat_id' => $chat_id, 'reply_markup' => $keyb, 'photo' => $epiphoto, 'caption' => $Description, 'parse_mode' => 'markdown']);
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $episodevideoM3u8Url]);
+        #$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $episodevideoM3u8Url]);
         unlink("epiphoto.jpeg");
     }
 
