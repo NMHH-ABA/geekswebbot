@@ -67,7 +67,7 @@
           -->
         <video id=example-video width=960 height=400 class="video-js vjs-default-skin" controls>
           <source
-             src="//d2rwmwucnr0d10.cloudfront.net/live.m3u8"
+             src="https://d2rwmwucnr0d10.cloudfront.net/live.m3u8"
              type="application/x-mpegURL">
         </video>
         </form>
