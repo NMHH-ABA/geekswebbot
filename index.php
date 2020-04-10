@@ -2210,7 +2210,7 @@ elseif (strstr($text, "ephls") == true) {
 
         $keyb = $telegram->buildInlineKeyBoard($option);
         $telegram->sendPhoto(['chat_id' => $chat_id, 'reply_markup' => $keyb, 'photo' => $epiphoto, 'caption' => $Description, 'parse_mode' => 'markdown']);
-        #$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $episodevideoM3u8Url]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $episodevideoM3u8Url]);
         unlink("epiphoto.jpeg");
     }
 
