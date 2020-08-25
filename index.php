@@ -3568,15 +3568,12 @@ else if ( $msgType == 'inline_query' ) {
             $nextweek = date_create ( "$FADATE" );
             date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
             $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
-            $nextweekENH = date_format ( $nextweek , "H" );
-            $nextweekENHP = $nextweekENH + 6;
-            $nextweekENS = date_format ( $nextweek , "i" );
 
             $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
             $tedad = count ( $array[ 'details' ][ 'list' ] );
             $AAAAAAAAAAAA = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z";
-            $BBBBBBBBBBBB = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z";
-            $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z" ) , TRUE );
+            $BBBBBBBBBBBB = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z";
+            $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAA]);
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $BBBBBBBBBBBB]);
             for ( $p = 0 ; $p < $tedad ; $p ++ ) {
