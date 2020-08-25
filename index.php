@@ -3570,8 +3570,8 @@ else if ( $msgType == 'inline_query' ) {
                 $ENDATE = date_create ( "$FADATE" );
                 date_add ( $ENDATE , date_interval_create_from_date_string ( "$handler[1] days" ) );
                 $ENDATE = date_format ( $ENDATE , "Y-m-d" );
-                
-                $nextweek = date_create ( "$FADATE" );
+
+                $nextweek = date_create ( "$ENDATE" );
                 date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
                 $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
 
