@@ -3608,7 +3608,7 @@ else if ( $msgType == 'inline_query' ) {
 
                 if ( ( $showID = $nextweekshowID ) == true)
                 {
-                    $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                    $stringData = $showTitle . "  " . $ses . "  " . $epi . $ENDATE;
                     $description = $schedulecurrentHouseNumber;
                 }
                 else if ( ( $showID != $nextweekshowID ) == true)
