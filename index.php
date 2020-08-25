@@ -3587,6 +3587,8 @@ else if ( $msgType == 'inline_query' ) {
                     $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
                     $nextweekshowID = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
                     $nextweekshowTitle = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+                    $dateUTCRoundedDownToFiveMinutes = $array[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
+                    $nextweekdateUTCRoundedDownToFiveMinutes = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
 
                     $Snum = strlen ( $seasonNumberen );
                     if ( $Snum < 1 == TRUE ) {
@@ -3608,14 +3610,21 @@ else if ( $msgType == 'inline_query' ) {
 
                     if ( ( $showID == $nextweekshowID ) == true)
                     {
-                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
                         $description = $schedulecurrentHouseNumber;
                     }
                     else if ( ( $showID != $nextweekshowID ) == true)
                     {
-                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
-                        $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                        if ( ( $dateUTCRoundedDownToFiveMinutes == $nextweekdateUTCRoundedDownToFiveMinutes ) == true)
+                        {
+                            $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                        }
+                        else
+                        {
+                            $description = $schedulecurrentHouseNumber;
+                        }
                     }
+
+                    $stringData = $showTitle . "  " . $ses . "  " . $epi;
 
                     $results[] = [
                         'type' => 'article' ,
@@ -3679,15 +3688,22 @@ else if ( $msgType == 'inline_query' ) {
 
                     if ( ( $showID == $nextweekshowID ) == true)
                     {
-                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
                         $description = $schedulecurrentHouseNumber;
                     }
                     else if ( ( $showID != $nextweekshowID ) == true)
                     {
-                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
-                        $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                        if ( ( $dateUTCRoundedDownToFiveMinutes == $nextweekdateUTCRoundedDownToFiveMinutes ) == true)
+                        {
+                            $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                        }
+                        else
+                        {
+                            $description = $schedulecurrentHouseNumber;
+                        }
                     }
 
+                    $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                    
                     $results[] = [
                         'type' => 'article' ,
                         'id' => base64_encode ( rand () ) ,
