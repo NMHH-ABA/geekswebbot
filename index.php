@@ -3599,16 +3599,16 @@ else if ( $msgType == 'inline_query' ) {
                     $episodeNumber = tr_num ( $episodeNumberen , 'fa' );
                     $epi = "ﻗﺴﻤﺖ " . $episodeNumber;
                 }
-
+                
+                if ( ( $showID != $nextweekshowID ) == true)
+                {
+                    $stringData = $showTitle . "  " . $ses . "  " . $epi. "  " . "( پایانی )";
+                    $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                }
                 if ( ( $showID = $nextweekshowID ) == true)
                 {
                     $stringData = $showTitle . "  " . $ses . "  " . $epi;
                     $description = $schedulecurrentHouseNumber;
-                }
-                else if ( ( $showID != $nextweekshowID ) == true)
-                {
-                    $stringData = $showTitle . "  " . $ses . "  " . $epi. "  " . "( پایانی )";
-                    $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
                 }
 
                 $results[] = [
