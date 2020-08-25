@@ -3590,6 +3590,9 @@ else if ( $msgType == 'inline_query' ) {
                     $dateUTCRoundedDownToFiveMinutes = $array[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
                     $nextweekdateUTCRoundedDownToFiveMinutes = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
 
+                    $timeA = explode ( "T" , $dateUTCRoundedDownToFiveMinutes , 2 );
+                    $timeB = explode ( "T" , $nextweekdateUTCRoundedDownToFiveMinutes , 2 );
+
                     $Snum = strlen ( $seasonNumberen );
                     if ( $Snum < 1 == TRUE ) {
                         $ses = "";
@@ -3614,7 +3617,7 @@ else if ( $msgType == 'inline_query' ) {
                     }
                     else if ( ( $showID != $nextweekshowID ) == true)
                     {
-                        if ( ( $dateUTCRoundedDownToFiveMinutes == $nextweekdateUTCRoundedDownToFiveMinutes ) == true)
+                        if ( ( $timeA[1] == $timeB[1] ) == true)
                         {
                             $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
                         }
@@ -3667,6 +3670,11 @@ else if ( $msgType == 'inline_query' ) {
                     $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
                     $nextweekshowID = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
                     $nextweekshowTitle = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+                    $dateUTCRoundedDownToFiveMinutes = $array[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
+                    $nextweekdateUTCRoundedDownToFiveMinutes = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'dateUTCRoundedDownToFiveMinutes' ];
+
+                    $timeA = explode ( "T" , $dateUTCRoundedDownToFiveMinutes , 2 );
+                    $timeB = explode ( "T" , $nextweekdateUTCRoundedDownToFiveMinutes , 2 );
 
                     $Snum = strlen ( $seasonNumberen );
                     if ( $Snum < 1 == TRUE ) {
@@ -3692,7 +3700,7 @@ else if ( $msgType == 'inline_query' ) {
                     }
                     else if ( ( $showID != $nextweekshowID ) == true)
                     {
-                        if ( ( $dateUTCRoundedDownToFiveMinutes == $nextweekdateUTCRoundedDownToFiveMinutes ) == true)
+                        if ( ( $timeA[1] == $timeB[1] ) == true)
                         {
                             $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
                         }
