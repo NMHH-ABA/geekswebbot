@@ -3574,10 +3574,11 @@ else if ( $msgType == 'inline_query' ) {
 
             $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
             $tedad = count ( $array[ 'details' ][ 'list' ] );
-            $AAAAAAAAAAAAAAAAAAA = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z";
+            $AAAAAAAAAAAA = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z";
+            $BBBBBBBBBBBB = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z";
             $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z" ) , TRUE );
-            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAAAAAAAAA]);
-            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $ENDATE]);
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAA]);
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $BBBBBBBBBBBB]);
             for ( $p = 0 ; $p < $tedad ; $p ++ ) {
                 $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
@@ -3608,7 +3609,7 @@ else if ( $msgType == 'inline_query' ) {
 
                 if ( ( $showID = $nextweekshowID ) == true)
                 {
-                    $stringData = $showTitle . "  " . $ses . "  " . $epi . $ENDATE;
+                    $stringData = $showTitle . "  " . $ses . "  " . $epi;
                     $description = $schedulecurrentHouseNumber;
                 }
                 else if ( ( $showID != $nextweekshowID ) == true)
