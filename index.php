@@ -3571,8 +3571,8 @@ else if ( $msgType == 'inline_query' ) {
                 date_add ( $ENDATE , date_interval_create_from_date_string ( "$handler[1] days" ) );
                 $ENDATE = date_format ( $ENDATE , "Y-m-d" );
 
-                $nextweek = date_create ( "$ENDATE" );
-                date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
+                $nextweek = date_create ( "$FADATE" );
+                date_add ( $nextweek , date_interval_create_from_date_string ( "$handler[1] + 7 days" ) );
                 $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
 
                 $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
@@ -3703,7 +3703,7 @@ else if ( $msgType == 'inline_query' ) {
                     }
 
                     $stringData = $showTitle . "  " . $ses . "  " . $epi;
-                    
+
                     $results[] = [
                         'type' => 'article' ,
                         'id' => base64_encode ( rand () ) ,
