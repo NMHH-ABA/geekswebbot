@@ -3577,6 +3577,7 @@ else if ( $msgType == 'inline_query' ) {
             $AAAAAAAAAAAAAAAAAAA = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z";
             $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z" ) , TRUE );
             $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAAAAAAAAA]);
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $ENDATE]);
             for ( $p = 0 ; $p < $tedad ; $p ++ ) {
                 $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
