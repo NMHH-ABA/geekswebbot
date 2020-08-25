@@ -3552,76 +3552,152 @@ else if ( $msgType == 'inline_query' ) {
             }
             $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) ] );
         }
-        else if ( $inline_query_text == "t" ){
-            $ENDATE = date ( "Y-m-d" );
-            #$timeinput = explode ( " " , $inline_query_text , 2 );
-            $HO = "17";
-            $MI = "30";
+        else if ( stristr ( $inline_query_text , "t" ) == TRUE ){
+            if ( stristr ( $inline_query_text , "+" ) == TRUE )
+            {
+                $handler = explode ( "+" , $inline_query_text , 2 );
+                $ENDATE = date ( "Y-m-d" );
+                date_add ( $ENDATE , date_interval_create_from_date_string ( "$handler[1] days" ) );
+                #$timeinput = explode ( " " , $inline_query_text , 2 );
+                $HO = "17";
+                $MI = "30";
 
-            $FADATE = date ( "H:i:s" , mktime ( $HO , $MI , 0 ) );//تاریخ روز ورودی به میلادی
-            $firstdate = date_create ( "$FADATE" );
-            date_add ( $firstdate , date_interval_create_from_date_string ( "-16200 secs" ) );
-            $ENH = date_format ( $firstdate , "H" );
-            $ENHP = $ENH + 6;
-            $ENS = date_format ( $firstdate , "i" );
+                $FADATE = date ( "H:i:s" , mktime ( $HO , $MI , 0 ) );//تاریخ روز ورودی به میلادی
+                $firstdate = date_create ( "$FADATE" );
+                date_add ( $firstdate , date_interval_create_from_date_string ( "-16200 secs" ) );
+                $ENH = date_format ( $firstdate , "H" );
+                $ENHP = $ENH + 6;
+                $ENS = date_format ( $firstdate , "i" );
 
-            $nextweek = date_create ( "$FADATE" );
-            date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
-            $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
+                $nextweek = date_create ( "$FADATE" );
+                date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
+                $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
 
-            $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
-            $tedad = count ( $array[ 'details' ][ 'list' ] );
-            $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
-            for ( $p = 0 ; $p < $tedad ; $p ++ ) {
-                $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
-                $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
-                $episodeNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'episodeNumber' ];
-                $seasonNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'seasonNumber' ];
-                $showTitle = $array[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
-                $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
-                $nextweekshowID = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
-                $nextweekshowTitle = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+                $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
+                $tedad = count ( $array[ 'details' ][ 'list' ] );
+                $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
+                for ( $p = 0 ; $p < $tedad ; $p ++ ) {
+                    $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
+                    $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
+                    $episodeNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'episodeNumber' ];
+                    $seasonNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'seasonNumber' ];
+                    $showTitle = $array[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+                    $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
+                    $nextweekshowID = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
+                    $nextweekshowTitle = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
 
-                $Snum = strlen ( $seasonNumberen );
-                if ( $Snum < 1 == TRUE ) {
-                    $ses = "";
+                    $Snum = strlen ( $seasonNumberen );
+                    if ( $Snum < 1 == TRUE ) {
+                        $ses = "";
+                    }
+                    if ( $Snum > 0 == TRUE ) {
+                        $seasonNumber = tr_num ( $seasonNumberen , 'fa' );
+                        $ses = "ﻓﺼﻞ " . $seasonNumber;
+                    }
+
+                    $Enum = strlen ( $episodeNumberen );
+                    if ( $Enum < 1 == TRUE ) {
+                        $epi = " ";
+                    }
+                    if ( $Enum > 0 == TRUE ) {
+                        $episodeNumber = tr_num ( $episodeNumberen , 'fa' );
+                        $epi = "ﻗﺴﻤﺖ " . $episodeNumber;
+                    }
+
+                    if ( ( $showID == $nextweekshowID ) == true)
+                    {
+                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                        $description = $schedulecurrentHouseNumber;
+                    }
+                    else if ( ( $showID != $nextweekshowID ) == true)
+                    {
+                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                        $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                    }
+
+                    $results[] = [
+                        'type' => 'article' ,
+                        'id' => base64_encode ( rand () ) ,
+                        'title' => $stringData ,
+                        'message_text' => "https://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber . ".m3u8" ,
+                        'description' => $description ,
+                        'thumb_url' => $portraitImgIxUrl ,
+                    ];
                 }
-                if ( $Snum > 0 == TRUE ) {
-                    $seasonNumber = tr_num ( $seasonNumberen , 'fa' );
-                    $ses = "ﻓﺼﻞ " . $seasonNumber;
-                }
-
-                $Enum = strlen ( $episodeNumberen );
-                if ( $Enum < 1 == TRUE ) {
-                    $epi = " ";
-                }
-                if ( $Enum > 0 == TRUE ) {
-                    $episodeNumber = tr_num ( $episodeNumberen , 'fa' );
-                    $epi = "ﻗﺴﻤﺖ " . $episodeNumber;
-                }
-
-                if ( ( $showID == $nextweekshowID ) == true)
-                {
-                    $stringData = $showTitle . "  " . $ses . "  " . $epi;
-                    $description = $schedulecurrentHouseNumber;
-                }
-                else if ( ( $showID != $nextweekshowID ) == true)
-                {
-                    $stringData = $showTitle . "  " . $ses . "  " . $epi. "  " . "( پایانی )";
-                    $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
-                }
-
-                $results[] = [
-                    'type' => 'article' ,
-                    'id' => base64_encode ( rand () ) ,
-                    'title' => $stringData ,
-                    'message_text' => "https://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber . ".m3u8" ,
-                    'description' => $description ,
-                    'thumb_url' => $portraitImgIxUrl ,
-                ];
+                $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) , 'cache_time' => "30" ] );
             }
-            $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) , 'cache_time' => "30" ] );
-        }
+            else
+            {
+                $ENDATE = date ( "Y-m-d" );
+                #$timeinput = explode ( " " , $inline_query_text , 2 );
+                $HO = "17";
+                $MI = "30";
+
+                $FADATE = date ( "H:i:s" , mktime ( $HO , $MI , 0 ) );//تاریخ روز ورودی به میلادی
+                $firstdate = date_create ( "$FADATE" );
+                date_add ( $firstdate , date_interval_create_from_date_string ( "-16200 secs" ) );
+                $ENH = date_format ( $firstdate , "H" );
+                $ENHP = $ENH + 6;
+                $ENS = date_format ( $firstdate , "i" );
+
+                $nextweek = date_create ( "$FADATE" );
+                date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
+                $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
+
+                $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $ENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
+                $tedad = count ( $array[ 'details' ][ 'list' ] );
+                $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $ENH . ":" . $ENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $ENHP . ":" . $ENS . ":00.000Z" ) , TRUE );
+                for ( $p = 0 ; $p < $tedad ; $p ++ ) {
+                    $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
+                    $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
+                    $episodeNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'episodeNumber' ];
+                    $seasonNumberen = $array[ 'details' ][ 'list' ][ "$p" ][ 'seasonNumber' ];
+                    $showTitle = $array[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+                    $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
+                    $nextweekshowID = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showID' ];
+                    $nextweekshowTitle = $nextweekarray[ 'details' ][ 'list' ][ "$p" ][ 'showTitle' ];
+
+                    $Snum = strlen ( $seasonNumberen );
+                    if ( $Snum < 1 == TRUE ) {
+                        $ses = "";
+                    }
+                    if ( $Snum > 0 == TRUE ) {
+                        $seasonNumber = tr_num ( $seasonNumberen , 'fa' );
+                        $ses = "ﻓﺼﻞ " . $seasonNumber;
+                    }
+
+                    $Enum = strlen ( $episodeNumberen );
+                    if ( $Enum < 1 == TRUE ) {
+                        $epi = " ";
+                    }
+                    if ( $Enum > 0 == TRUE ) {
+                        $episodeNumber = tr_num ( $episodeNumberen , 'fa' );
+                        $epi = "ﻗﺴﻤﺖ " . $episodeNumber;
+                    }
+
+                    if ( ( $showID == $nextweekshowID ) == true)
+                    {
+                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                        $description = $schedulecurrentHouseNumber;
+                    }
+                    else if ( ( $showID != $nextweekshowID ) == true)
+                    {
+                        $stringData = $showTitle . "  " . $ses . "  " . $epi;
+                        $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
+                    }
+
+                    $results[] = [
+                        'type' => 'article' ,
+                        'id' => base64_encode ( rand () ) ,
+                        'title' => $stringData ,
+                        'message_text' => "https://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber . ".m3u8" ,
+                        'description' => $description ,
+                        'thumb_url' => $portraitImgIxUrl ,
+                    ];
+                }
+                $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) , 'cache_time' => "30" ] );
+            }
+            }
         else {
             $ENDATE = date ( "Y-m-d" );
             $timeinput = explode ( " " , $inline_query_text , 2 );
