@@ -3599,7 +3599,7 @@ else if ( $msgType == 'inline_query' ) {
                     $episodeNumber = tr_num ( $episodeNumberen , 'fa' );
                     $epi = "ﻗﺴﻤﺖ " . $episodeNumber;
                 }
-                
+
                 if ( ( $showID != $nextweekshowID ) == true)
                 {
                     $stringData = $showTitle . "  " . $ses . "  " . $epi. "  " . "( پایانی )";
