@@ -3576,7 +3576,7 @@ else if ( $msgType == 'inline_query' ) {
             $tedad = count ( $array[ 'details' ][ 'list' ] );
             $AAAAAAAAAAAAAAAAAAA = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z";
             $nextweekarray = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $nextweekENDATE . "T" . $nextweekENH . ":" . $nextweekENS . ":00.000Z&to=" . $nextweekENDATE . "T" . $nextweekENHP . ":" . $nextweekENS . ":00.000Z" ) , TRUE );
-
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAAAAAAAAA]);
             for ( $p = 0 ; $p < $tedad ; $p ++ ) {
                 $schedulecurrentHouseNumber = $array[ 'details' ][ 'list' ][ "$p" ][ 'currentHouseNumber' ];
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
@@ -3612,7 +3612,6 @@ else if ( $msgType == 'inline_query' ) {
                 }
                 else if ( ( $showID != $nextweekshowID ) == true)
                 {
-                    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $AAAAAAAAAAAAAAAAAAA]);
                     $stringData = $showTitle . "  " . $ses . "  " . $epi. "  " . "( پایانی )";
                     $description = $schedulecurrentHouseNumber . " " . "( هفته بعد $nextweekshowTitle )";
                 }
