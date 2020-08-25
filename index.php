@@ -3556,9 +3556,7 @@ else if ( $msgType == 'inline_query' ) {
             if ( stristr ( $inline_query_text , "+" ) == TRUE )
             {
                 $handler = explode ( "+" , $inline_query_text , 2 );
-                $ENDATE = date ( "Y-m-d" );
-                date_add ( $ENDATE , date_interval_create_from_date_string ( "$handler[1] days" ) );
-                #$timeinput = explode ( " " , $inline_query_text , 2 );
+                #$ENDATE = date ( "Y-m-d" );
                 $HO = "17";
                 $MI = "30";
 
@@ -3569,6 +3567,10 @@ else if ( $msgType == 'inline_query' ) {
                 $ENHP = $ENH + 6;
                 $ENS = date_format ( $firstdate , "i" );
 
+                $ENDATE = date_create ( "$FADATE" );
+                date_add ( $ENDATE , date_interval_create_from_date_string ( "$handler[1] days" ) );
+                $ENDATE = date_format ( $ENDATE , "Y-m-d" );
+                
                 $nextweek = date_create ( "$FADATE" );
                 date_add ( $nextweek , date_interval_create_from_date_string ( "7 days" ) );
                 $nextweekENDATE = date_format ( $nextweek , "Y-m-d" );
