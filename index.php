@@ -490,7 +490,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
     $dayharfi = jgetdate ( $TimeStamp );
     $dateharfi = tr_num ( ( $dayharfi[ weekday ] . " " . $dayharfi[ mday ] . " " . $dayharfi[ month ] . " " . $dayharfi[ year ] ) , 'fa' );
 
-    $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATEPre . "T19:30:00.000Z&to=" . $ENDATE . "T19:30:00.000Z" ) , TRUE );
+    $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATEPre . "T20:30:00.000Z&to=" . $ENDATE . "T20:30:00.000Z" ) , TRUE );
     $scheduleItemID = $array[ 'details' ][ 'list' ][ '0' ][ 'scheduleItemID' ];
 
     if ( is_numeric ( $scheduleItemID ) == "1" ) {
@@ -2031,7 +2031,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         date_add ( $day8 , date_interval_create_from_date_string ( "7 days" ) );
         $Day8 = date_format ( $day8 , "Y-m-d" );
 
-        $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $Day1 . "T19:30:00.000Z&to=" . $Day8 . "T19:30:00.000Z" ) , TRUE );
+        $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $Day1 . "T20:30:00.000Z&to=" . $Day8 . "T20:30:00.000Z" ) , TRUE );
         $showlink = "https://www.manototv.com/show/" . $showid[ 1 ];
         $array2 = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/metadatamodule/pagetitle?url=" . $showlink ) , TRUE );
         $showTitle = $array2[ 'details' ][ 'pageTitle' ];
