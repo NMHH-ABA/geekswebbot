@@ -3728,7 +3728,7 @@ else if ( $msgType == 'inline_query' ) {
             $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/list?sortBy=latest&genre=&pageNumber=1&pageSize=350" ) , TRUE );
             $tedad = $array[ 'details' ][ 'resultsCount' ];
             for ( $p = 0 ; $p < $tedad ; $p ++ ) {
-                $formattedShowTitle  = $array[ 'details' ][ 'list' ][ "$p" ][ 'formattedShowTitle ' ];
+                $formattedShowTitle  = $array[ 'details' ][ 'list' ][ "$p" ][ 'formattedShowTitle' ];
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
                 $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'id' ];
 
