@@ -3732,14 +3732,14 @@ else if ( $msgType == 'inline_query' ) {
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
                 $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'id' ];
 
-                if ( stristr ( $inline_query_text , "$formattedShowTitle" ) == TRUE ) {
+                if ( stristr ( $formattedShowTitle , "$inline_query_text" ) == TRUE ) {
                     $ShowTitle = $formattedShowTitle;
                 }
 
                 $results[] = [
                     'type' => 'article' ,
                     'id' => base64_encode ( rand () ) ,
-                    'title' => $ShowTitle ,
+                    'title' => $showID ,
                     'message_text' => $showID ,
                     'description' => $showID ,
                     'thumb_url' => $portraitImgIxUrl ,
