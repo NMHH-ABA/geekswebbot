@@ -3746,6 +3746,8 @@ else if ( $msgType == 'inline_query' ) {
                     'thumb_url' => $portraitImgIxUrl ,
                 ];
             }
+        }
+
             $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) , 'cache_time' => "30" ] );
                 }
 }
