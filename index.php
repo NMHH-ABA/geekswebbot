@@ -3735,7 +3735,7 @@ else if ( $msgType == 'inline_query' ) {
 
                 if ( stristr ( $formattedShowTitle , $inline_query_text ) == TRUE ) {
                     $ShowTitle = $formattedShowTitle;
-                }
+                #
 
                 $results[] = [
                     'type' => 'article' ,
@@ -3745,6 +3745,7 @@ else if ( $msgType == 'inline_query' ) {
                     'description' => $showID ,
                     'thumb_url' => $portraitImgIxUrl ,
                 ];
+                    }
             }
         }
             $telegram -> answerInlineQuery ( [ 'inline_query_id' => $inline_query_id , 'results' => json_encode ( $results ) , 'cache_time' => "30" ] );
