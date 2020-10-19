@@ -3727,21 +3727,19 @@ else if ( $msgType == 'inline_query' ) {
         else {
             $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/list?sortBy=latest&genre=&pageNumber=1&pageSize=350" ) , TRUE );
             $tedad = $array[ 'details' ][ 'resultsCount' ];
-            for ( $p = 0 ; $p < 5 ; $p ++ ) {
+            for ( $p = 0 ; $p < $tedad ; $p ++ ) {
                 $formattedShowTitle = $array[ 'details' ][ 'list' ][ "$p" ][ 'formattedShowTitle' ];
                 $portraitImgIxUrl = $array[ 'details' ][ 'list' ][ "$p" ][ 'portraitImgIxUrl' ];
                 $showID = $array[ 'details' ][ 'list' ][ "$p" ][ 'id' ];
-                #$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $formattedShowTitle]);
 
                 if ( stristr ( $formattedShowTitle , $inline_query_text ) == TRUE ) {
                     $ShowTitle = $formattedShowTitle;
-                #
 
                 $results[] = [
                     'type' => 'article' ,
                     'id' => base64_encode ( rand () ) ,
                     'title' => $ShowTitle ,
-                    'message_text' => $showID ,
+                    'message_text' => "genres-showsid"$showID ,
                     'description' => $showID ,
                     'thumb_url' => $portraitImgIxUrl ,
                 ];
