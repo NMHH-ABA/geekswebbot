@@ -3739,7 +3739,7 @@ else if ( $msgType == 'inline_query' ) {
                     'type' => 'article' ,
                     'id' => base64_encode ( rand () ) ,
                     'title' => $ShowTitle ,
-                    'message_text' => "genres-showsid"$showID ,
+                    'message_text' => "genres-showsid" . $showID ,
                     'description' => $showID ,
                     'thumb_url' => $portraitImgIxUrl ,
                 ];
