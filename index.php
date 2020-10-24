@@ -3381,7 +3381,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
         $ENDATE1 = date_format ( $ENDATE , "Y-m-d" );
         $Scheduleurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE1 . "T" . $ENTIME . ":" . $minute . ":00.000Z&to=" . $ENDATE . "T" . $hourplus . ":00.000Z";
     }
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $ENDATE]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $Scheduleurl]);
     $array = json_decode ( file_get_contents ( $Scheduleurl ) , TRUE );
     $dateUTCRoundedDownToFiveMinutes = $array[ 'details' ][ 'list' ][ '0' ][ 'dateUTCRoundedDownToFiveMinutes' ];
     $userinputtime = ( $ENDATE . "T" . $ENTIME . ":" . $minute . ":00" );
