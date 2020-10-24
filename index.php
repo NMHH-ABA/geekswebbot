@@ -3544,7 +3544,7 @@ else if ( $msgType == 'inline_query' ) {
                 if ( $showID == "1059" or "2619" )  {
                     $array2 = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/metadatamodule/pagetitle?url=https://www.manototv.com/episode/" . $array[ 'details' ][ 'list' ][ $p ][ 'id' ] ) , TRUE );
                     $formattedEpisodeTitle = $array2[ 'details' ][ 'pageTitle' ];
-                } 
+                }
                 else {
                     $formattedEpisodeTitle = $array[ 'details' ][ 'list' ][ $p ][ 'formattedEpisodeTitle' ];
                 }
