@@ -3442,7 +3442,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
     $epsodelistgetdate1 = explode ( "T" , $dateUTCRoundedDownToFiveMinutes , 2 );
     $epsodelistgetdate2 = explode ( "-" , $epsodelistgetdate1[ 0 ] , 3 );
 
-    if ($datea[ 1 ] == "21:00:00" or "21:30:00"or "22:00:00"or "22:30:00"or "23:00:00"or "23:30:00")
+    if ($datea[ 1 ] == "21:00:00" or "21:30:00" or "22:00:00" or "22:30:00" or "23:00:00" or "23:30:00")
     {
         $epsodelistgetdate2[ 2 ] == $epsodelistgetdate2[ 2 ] +1;
     }
