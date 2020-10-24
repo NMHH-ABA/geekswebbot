@@ -3376,7 +3376,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
 
     $Scheduleurl = "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/schedulemodule/schedule?from=" . $ENDATE . "T" . $ENTIME . ":" . $minute . ":00.000Z&to=" . $ENDATE . "T" . $hourplus . ":00.000Z";
     $userinputtime = ( $ENDATE . "T" . $ENTIME . ":" . $minute . ":00" );
-    if ($ENTIME = "23")
+    if ($ENTIME == "23")
     {
         $date23 = date_create ( $ENDATE );
         date_add ( $date23 , date_interval_create_from_date_string ( "-1 days" ) );
