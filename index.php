@@ -3442,6 +3442,10 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
     $epsodelistgetdate1 = explode ( "T" , $dateUTCRoundedDownToFiveMinutes , 2 );
     $epsodelistgetdate2 = explode ( "-" , $epsodelistgetdate1[ 0 ] , 3 );
 
+    if ($datea[ 1 ] == "21:00:00" or "21:30:00"or "22:00:00"or "22:30:00"or "23:00:00"or "23:30:00")
+    {
+        $epsodelistgetdate2[ 2 ] = $epsodelistgetdate2[ 2 ] +1;
+    }
     $epsodelistShowon = gregorian_to_jalali ( $epsodelistgetdate2[ 0 ] , $epsodelistgetdate2[ 1 ] , $epsodelistgetdate2[ 2 ] , '-' );
     $epsodelistShowonfa = tr_num ( $epsodelistShowon , 'fa' );
     $showon = explode ( "-" , $epsodelistShowonfa , 3 );
