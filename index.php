@@ -3355,6 +3355,14 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
     $ENDATE = date_format ( $firstdate , "Y-m-d" );
     $ENTIME = date_format ( $firstdate , "H" );
 
+    if ($ENTIME = "23")
+    {
+        $newY = date_format ( $firstdate , "Y" );
+        $newM = date_format ( $firstdate , "m" );
+        $newD = date_format ( $firstdate , "d" );
+        $ENDATE = $newY . "-" . $newM . "-" . $newD - 1;
+    }
+    
     if ( $MI < "30" and $MI !== "30" and $MI !== "00" ) {
         $minute = "30";
     }
@@ -3494,7 +3502,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
 
         $keyb1 = $telegram -> buildInlineKeyBoard ( $option1 );
         $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'reply_markup' => $keyb1 , 'photo' => $scheduleportraitImgIxUrl1 , 'caption' => $scheduleCaption1 ] );
-        
+
     } else if ( $status == "0" ) {
         $error = $array[ 'errors' ][ '0' ][ 'messageCode' ];
         $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $error . " ScheduleID" ] );
