@@ -2114,7 +2114,42 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $EPTitle = [];
         $EPID = [];
         $formattedEpisodeTitle = [];
-        if ( $showid[ 1 ] = 1309 or 1983 ) {
+        if ( $showid[ 1 ] == 1309 ) {
+            for ( $p = 0 ; $p < 8 ; $p ++ ) {
+                $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'episodeNumber' ];
+                $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
+                $array2 = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/metadatamodule/pagetitle?url=https://www.manototv.com/episode/" . $array[ 'details' ][ 'list' ][ $p ][ 'id' ] ) , TRUE );
+                $EpisodeTitle = explode ( ' - ' , $array2[ 'details' ][ 'pageTitle' ] );
+                $formattedEpisodeTitle[] = $EpisodeTitle[ 1 ];
+            }
+            $option = [
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[6]) $formattedEpisodeTitle[6]" , $url = "" , $callback_data = "eps$EPID[6]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[5]) $formattedEpisodeTitle[5]" , $url = "" , $callback_data = "eps$EPID[5]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[4]) $formattedEpisodeTitle[4]" , $url = "" , $callback_data = "eps$EPID[4]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[3]) $formattedEpisodeTitle[3]" , $url = "" , $callback_data = "eps$EPID[3]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[2]) $formattedEpisodeTitle[2]" , $url = "" , $callback_data = "eps$EPID[2]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[1]) $formattedEpisodeTitle[1]" , $url = "" , $callback_data = "eps$EPID[1]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "($EPTitle[0]) $formattedEpisodeTitle[0]" , $url = "" , $callback_data = "eps$EPID[0]" ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( "بازگشت" , $url = "" , $callback_data = "genres-editshowsid" . $showsid ) ,
+                ] ,
+            ];
+        }
+        elseif ( $showid[ 1 ] == 1983 ) {
             for ( $p = 0 ; $p < 8 ; $p ++ ) {
                 $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'episodeNumber' ];
                 $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
