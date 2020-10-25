@@ -2114,7 +2114,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $EPTitle = [];
         $EPID = [];
         $formattedEpisodeTitle = [];
-        if ( $showid[ 1 ] == 1309 or 1983 ) {
+        if ( $showid[ 1 ] = 1309 or 1983 ) {
             for ( $p = 0 ; $p < 8 ; $p ++ ) {
                 $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'episodeNumber' ];
                 $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
