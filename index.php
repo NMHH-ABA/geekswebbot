@@ -2202,6 +2202,11 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         do {
             $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'airDate' ];
             $formattedEpisodeTitle = $array[ 'details' ][ 'list' ][ $number ][ 'formattedEpisodeTitle' ];
+            if ( stristr ( $formattedEpisodeTitle , '2020' ) == TRUE )
+            {
+                $formattedEpisodeTitle = $showTitle;
+
+            }
             $repeatDates = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ];
             $counterepeat = count ( $repeatDates );
 
@@ -2225,7 +2230,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
 
             $episodelink = "https://www.manototv.com/episode/" . $episodeID;
             $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
-            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $counterepeat]);
             fwrite ( $FileHandle , $stringData );
             if ($counterepeat >= 1) {
                 $num = 0;
