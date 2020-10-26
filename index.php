@@ -2224,7 +2224,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
 
 
             $episodelink = "https://www.manototv.com/episode/" . $episodeID;
-            $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . "\t\t\t\t\t" . "*$dateharfi*" . ")\n\n";
+            $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
 
             fwrite ( $FileHandle , $stringData );
             $number = $number + 1;
