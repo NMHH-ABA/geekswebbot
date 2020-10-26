@@ -2230,7 +2230,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             if ($counterepeat >= 1) {
                 $num = 0;
                 do {
-                    $dateUTC = $repeatDates[ $num ];
+                    $dateUTC = $repeatDates[ 0 ];
                     $time1 = explode ( "T" , $dateUTC , 2 );
                     $time = explode ( ":" , $time1[ 1 ] , 3 );
                     $hour = $time[ 0 ];
@@ -2246,12 +2246,12 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                     $tarikh = jstrftime ( "%A %d %B" , mktime ( $H , $M , 0 , $Parts[ 1 ] , $Parts[ 2 ] , $Parts[ 0 ] ) );
                     $dateharfi = tr_num ( $tarikh . " ساعت  " . $H . ":" . $M , 'fa' );
 
-                    $stringData ="تکرار\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
+                    $stringData ="تکرار          " . "*$dateharfi*" . "\n\n";
 
                     fwrite ( $FileHandle , $stringData );
 
                     $num = $num + 1;
-                } while ( $number < $countepisode );
+                } while ( $num < $counterepeat );
                 }
             $number = $number + 1;
         } while ( $number < $countepisode );
