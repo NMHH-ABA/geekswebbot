@@ -2197,10 +2197,13 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $stringData = "بچه ﻫﺎی ﻣﻦ و ﺗﻮ @BachehayeManotoBot" . "\n\n" . "زمان پخش " . "[" . $showTitle . "](" . $showlink . ")" . "\n\n";
         fwrite ( $FileHandle , $stringData );
         $number = 0;
+        $episodecount = $array[ 'details' ][ 'list' ];
+        $countepisode = count ( $episodecount );
         do {
             $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'airDate' ];
             $formattedEpisodeTitle = $array[ 'details' ][ 'list' ][ $number ][ 'formattedEpisodeTitle' ];
             $repeatDates = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ];
+            $counterepeat = count ( $repeatDates );
 
             $episodeID = $array[ 'details' ][ 'list' ][ $number ][ 'id' ];
 
@@ -2221,11 +2224,11 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
 
 
             $episodelink = "https://www.manototv.com/episode/" . $episodeID;
-            $stringData = "*$dateharfi*" . "\t\t\t\t\t" . $ses . "\t\t\t" . "[" . $epi . "](" . $episodelink . ")\n\n";
+            $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . "\t\t\t\t\t" . "*$dateharfi*" . ")\n\n";
 
             fwrite ( $FileHandle , $stringData );
             $number = $number + 1;
-        } while ( $number < 3 );
+        } while ( $number < $countepisode );
 
         fclose ( $FileHandle );
         $sch2send = file_get_contents ( $FileName );
