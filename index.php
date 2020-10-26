@@ -9,7 +9,6 @@ $bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
 #$bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg"; #BachehayeManotoBot
 
 $sendhlsurl = "1";
-
 // Instances the class
 $telegram = new Telegram( $bot_id );
 $textoriginal = $telegram -> Text ();
@@ -2227,32 +2226,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
 
             fwrite ( $FileHandle , $stringData );
-            if ($counterepeat > 0) {
-                $num = 0;
-                do {
-                    $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ][ $num ];
-                    $time1 = explode ( "T" , $dateUTC , 2 );
-                    $time = explode ( ":" , $time1[ 1 ] , 3 );
-                    $hour = $time[ 0 ];
-                    $minute = $time[ 1 ];
-
-                    $day = date_create ( "$time1[0] $time1[1]" );
-                    date_add ( $day , date_interval_create_from_date_string ( "+12600 secs" ) );
-                    $Day = date_format ( $day , "Y-m-d" );
-                    $H = date_format ( $day , "H" );
-                    $M = date_format ( $day , "i" );
-
-                    $Parts = explode ( '-' , $Day , 3 );
-                    $tarikh = jstrftime ( "%A %d %B" , mktime ( $H , $M , 0 , $Parts[ 1 ] , $Parts[ 2 ] , $Parts[ 0 ] ) );
-                    $dateharfi = tr_num ( $tarikh . " ساعت  " . $H . ":" . $M , 'fa' );
-
-                    $stringData ="تکرار\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
-
-                    fwrite ( $FileHandle , $stringData );
-
-                    $num = $num + 1;
-                } while ( $number < $countepisode );
-                }
             $number = $number + 1;
         } while ( $number < $countepisode );
 
