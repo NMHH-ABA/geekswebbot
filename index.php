@@ -2225,7 +2225,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
 
             $episodelink = "https://www.manototv.com/episode/" . $episodeID;
             $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
-
+            $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $counterepeat]);
             fwrite ( $FileHandle , $stringData );
             
             $number = $number + 1;
