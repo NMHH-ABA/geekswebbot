@@ -2230,7 +2230,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             if ($counterepeat >= 1) {
                 $num = 0;
                 do {
-                    $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ][ $num ];
+                    $dateUTC = $repeatDates[ $num ];
                     $time1 = explode ( "T" , $dateUTC , 2 );
                     $time = explode ( ":" , $time1[ 1 ] , 3 );
                     $hour = $time[ 0 ];
