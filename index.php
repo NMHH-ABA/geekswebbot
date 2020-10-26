@@ -9,6 +9,7 @@ $bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
 #$bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg"; #BachehayeManotoBot
 
 $sendhlsurl = "1";
+
 // Instances the class
 $telegram = new Telegram( $bot_id );
 $textoriginal = $telegram -> Text ();
@@ -2226,6 +2227,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
 
             fwrite ( $FileHandle , $stringData );
+            
             $number = $number + 1;
         } while ( $number < $countepisode );
 
