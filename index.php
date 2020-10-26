@@ -2230,7 +2230,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             if ($counterepeat >= 1) {
                 $num = 0;
                 do {
-                    $dateUTC = $repeatDates[ 0 ];
+                    $dateUTC = $repeatDates[ $num ];
                     $time1 = explode ( "T" , $dateUTC , 2 );
                     $time = explode ( ":" , $time1[ 1 ] , 3 );
                     $hour = $time[ 0 ];
@@ -2260,8 +2260,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $sch2send = file_get_contents ( $FileName );
         if ( stristr ( $sch2send , 'ساعت' ) == TRUE ) {
             $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
-            $filetxt = new CURLFile( $FileName );
-            $telegram -> sendDocument ( [ 'chat_id' => '122558527' , 'document' => $filetxt ] );
             unlink ( $FileName );
         } else {
             $telegram -> answerCallbackQuery ( [ 'callback_query_id' => $telegram -> Callback_ID () , 'text' => "اطلاعات در دسترس نیست" , 'show_alert' => TRUE ] );
