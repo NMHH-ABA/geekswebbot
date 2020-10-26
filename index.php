@@ -1774,10 +1774,10 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                         $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش در هفت روز آینده' , $url = '' , $callback_data = "genres-playontv" . $showid[ 1 ] ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش در هفت روز آینده' , $url = '' , $callback_data = "genres-playontv" . $showid[ 1 ] ) ,
+                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
                     ] ,
                 ];
             }
@@ -2179,6 +2179,61 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             unlink ( $FileName );
         } else {
             $telegram -> answerCallbackQuery ( [ 'callback_query_id' => $telegram -> Callback_ID () , 'text' => "در این هفت روز $showTitle پخش نمیشه" , 'show_alert' => TRUE ] );
+            unlink ( $FileName );
+        }
+
+    }
+    else if ( stristr ( $handler[ 1 ] , 'repeatontv' ) == TRUE ) {
+        $showid = explode ( 'repeatontv' , $handler[ 1 ] );
+
+        $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/episodeairdateslist?id=" . $showid[ 1 ] ) , TRUE );
+        $showlink = "https://www.manototv.com/show/" . $showid[ 1 ];
+        $array2 = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/metadatamodule/pagetitle?url=" . $showlink ) , TRUE );
+        $showTitle = $array2[ 'details' ][ 'pageTitle' ];
+
+        $Random = rand ();
+        $FileName = "repeatontv" . $Random . ".txt";
+        $FileHandle = fopen ( $FileName , 'a' ) or die( "can't open file" );
+        $stringData = "بچه ﻫﺎی ﻣﻦ و ﺗﻮ @BachehayeManotoBot" . "\n\n" . "زمان پخش " . "[" . $showTitle . "](" . $showlink . ")" . "\n\n";
+        fwrite ( $FileHandle , $stringData );
+        $number = 0;
+        do {
+            $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'airDate' ];
+            $formattedEpisodeTitle = $array[ 'details' ][ 'list' ][ $number ][ 'formattedEpisodeTitle' ];
+            $repeatDates = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ];
+
+            $episodeID = $array[ 'details' ][ 'list' ][ $number ][ 'id' ];
+
+            $time1 = explode ( "T" , $dateUTC , 2 );
+            $time = explode ( ":" , $time1[ 1 ] , 3 );
+            $hour = $time[ 0 ];
+            $minute = $time[ 1 ];
+
+            $day = date_create ( "$time1[0] $time1[1]" );
+            date_add ( $day , date_interval_create_from_date_string ( "+12600 secs" ) );
+            $Day = date_format ( $day , "Y-m-d" );
+            $H = date_format ( $day , "H" );
+            $M = date_format ( $day , "i" );
+
+            $Parts = explode ( '-' , $Day , 3 );
+            $tarikh = jstrftime ( "%A %d %B" , mktime ( $H , $M , 0 , $Parts[ 1 ] , $Parts[ 2 ] , $Parts[ 0 ] ) );
+            $dateharfi = tr_num ( $tarikh . " ساعت  " . $H . ":" . $M , 'fa' );
+
+
+            $episodelink = "https://www.manototv.com/episode/" . $episodeID;
+            $stringData = "*$dateharfi*" . "\t\t\t\t\t" . $ses . "\t\t\t" . "[" . $epi . "](" . $episodelink . ")\n\n";
+
+            fwrite ( $FileHandle , $stringData );
+            $number = $number + 1;
+        } while ( $number < 3 );
+
+        fclose ( $FileHandle );
+        $sch2send = file_get_contents ( $FileName );
+        if ( stristr ( $sch2send , 'ساعت' ) == TRUE ) {
+            $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
+            unlink ( $FileName );
+        } else {
+            $telegram -> answerCallbackQuery ( [ 'callback_query_id' => $telegram -> Callback_ID () , 'text' => "اطلاعات در دسترس نیست" , 'show_alert' => TRUE ] );
             unlink ( $FileName );
         }
 
