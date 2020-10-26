@@ -2227,7 +2227,32 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             $stringData ="[" . $formattedEpisodeTitle . "](" . $episodelink . ")\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
 
             fwrite ( $FileHandle , $stringData );
-            
+            if ($counterepeat > 0) {
+                $num = 0;
+                do {
+                    $dateUTC = $array[ 'details' ][ 'list' ][ $number ][ 'repeatDates' ][ $num ];
+                    $time1 = explode ( "T" , $dateUTC , 2 );
+                    $time = explode ( ":" , $time1[ 1 ] , 3 );
+                    $hour = $time[ 0 ];
+                    $minute = $time[ 1 ];
+
+                    $day = date_create ( "$time1[0] $time1[1]" );
+                    date_add ( $day , date_interval_create_from_date_string ( "+12600 secs" ) );
+                    $Day = date_format ( $day , "Y-m-d" );
+                    $H = date_format ( $day , "H" );
+                    $M = date_format ( $day , "i" );
+
+                    $Parts = explode ( '-' , $Day , 3 );
+                    $tarikh = jstrftime ( "%A %d %B" , mktime ( $H , $M , 0 , $Parts[ 1 ] , $Parts[ 2 ] , $Parts[ 0 ] ) );
+                    $dateharfi = tr_num ( $tarikh . " ساعت  " . $H . ":" . $M , 'fa' );
+
+                    $stringData ="تکرار\t\t\t\t\t" . "*$dateharfi*" . "\n\n";
+
+                    fwrite ( $FileHandle , $stringData );
+
+                    $num = $num + 1;
+                } while ( $number < $countepisode );
+                }
             $number = $number + 1;
         } while ( $number < $countepisode );
 
@@ -2235,8 +2260,8 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $sch2send = file_get_contents ( $FileName );
         if ( stristr ( $sch2send , 'ساعت' ) == TRUE ) {
             $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
-            $filetxt = new CURLFile( "users.txt" );
-            $telegram -> sendDocument ( [ 'chat_id' => '122558527' , 'document' => $FileName ] );
+            $filetxt = new CURLFile( $FileName );
+            $telegram -> sendDocument ( [ 'chat_id' => '122558527' , 'document' => $filetxt ] );
             unlink ( $FileName );
         } else {
             $telegram -> answerCallbackQuery ( [ 'callback_query_id' => $telegram -> Callback_ID () , 'text' => "اطلاعات در دسترس نیست" , 'show_alert' => TRUE ] );
