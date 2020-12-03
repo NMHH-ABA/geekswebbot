@@ -1416,11 +1416,11 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                         $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
                         $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( "سفرهای هومن" , $url = '' , $switch_inline_query_current_chat = "سفرهای هومن" ) ,
+                        $telegram -> buildInlineKeyBoardButton ( "سفرهای هومن" , $url = '' , $callback_data = "human" , $switch_inline_query_current_chat = "سفرهای هومن" ) ,
                     ] ,
                 ];
             }
