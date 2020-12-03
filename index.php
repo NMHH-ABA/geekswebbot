@@ -3515,6 +3515,16 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                     $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[24] . " " , $url = '' , $callback_data = 'vts' . $id[24] ) ,
                 ] ,
                 [
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[29] . " " , $url = '' , $callback_data = 'vts'. $id[29] ) ,
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[28] . " " , $url = '' , $callback_data = 'vts' . $id[28] ) ,
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[27] . " " , $url = '' , $callback_data = 'vts' . $id[27] ) ,
+                ] ,
+                [
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[32] . " " , $url = '' , $callback_data = 'vts'. $id[32] ) ,
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[31] . " " , $url = '' , $callback_data = 'vts' . $id[31] ) ,
+                    $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[30] . " " , $url = '' , $callback_data = 'vts' . $id[30] ) ,
+                ] ,
+                [
                     $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = "genres-" . $showid[ 0 ] . "vts4" ) ,
                     $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = "genres-" . $showid[ 0 ] . "vts3" ) ,
                     $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = "genres-" . $showid[ 0 ] . "vts2" ) ,
