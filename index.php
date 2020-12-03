@@ -3524,7 +3524,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             ];
         }
 
-        $PageNo = tr_num ( $gnr[ 1 ] , 'fa' );
+        $PageNo = tr_num ( $showid[ 1 ] + 1 , 'fa' );
         $keyb = $telegram -> buildInlineKeyBoard ( $option );
         $telegram -> SendMessage ( [ 'chat_id' => $chat_id , 'reply_markup' => $keyb , 'text' => "کلیپ موردنظرتون رو انتخاب کنید - صفحه " . $PageNo ] );
     }
