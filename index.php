@@ -3004,8 +3004,8 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                 $EPID = [];
 
                 for ( $p = 0 ; $p < 21 ; $p ++ ) {
-                    $EPID[] = $array[ 'details' ][ 'list' ][ $NO ][ 'id' ];
-                    $EPTitle[] = $array[ 'details' ][ 'list' ][ $NO ][ 'videoclipTitle' ];
+                    $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
+                    $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
                 }
 
                 if ($TedadPage < 10)
@@ -3051,7 +3051,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3099,7 +3098,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3148,7 +3146,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3198,7 +3195,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3251,7 +3247,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3305,7 +3300,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3360,7 +3354,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3416,7 +3409,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3473,7 +3465,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                             ] ,
                             [
                                 $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                             ] ,
                         ];
                     }
@@ -3534,7 +3525,6 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                         ] ,
                         [
                             $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
-                            $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
                         ] ,
                     ];
                 }
