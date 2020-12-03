@@ -3000,12 +3000,12 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                 $countepisode = count ( $episodecount );
                 $TedadPage = intdiv($countepisode,21);
 
-                $EPTitle = [];
-                $EPID = [];
+                $formattedShowTitle = [];
+                $id = [];
 
                 for ( $p = 0 ; $p < 21 ; $p ++ ) {
-                    $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
-                    $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
+                    $id[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
+                    $formattedShowTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
                 }
 
                 if ($TedadPage < 10)
