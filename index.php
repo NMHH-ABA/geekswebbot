@@ -2993,12 +2993,12 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videocliplist?id=" . $showid[ 0 ] ) , TRUE );
         $episodecount = $array[ 'details' ][ 'list' ];
         $countepisode = count ( $episodecount );
-        $TedadPage = intdiv($countepisode,39);
+        $TedadPage = intdiv($countepisode,21);
 
         $formattedShowTitle = [];
         $id = [];
 
-        for ( $p = $showid[ 1 ] * 39 ; $p < $showid[ 1 ] * 39  + 39 ; $p ++ ) {
+        for ( $p = $showid[ 1 ] * 21 ; $p < $showid[ 1 ] * 21  + 21 ; $p ++ ) {
             $id[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
             $formattedShowTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
         }
