@@ -2993,12 +2993,12 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videocliplist?id=" . $showid[ 0 ] ) , TRUE );
         $episodecount = $array[ 'details' ][ 'list' ];
         $countepisode = count ( $episodecount );
-        $TedadPage = intdiv($countepisode,27);
+        $TedadPage = intdiv($countepisode,33);
 
         $formattedShowTitle = [];
         $id = [];
 
-        for ( $p = $showid[ 1 ] * 27 ; $p < $showid[ 1 ] * 27  + 27 ; $p ++ ) {
+        for ( $p = $showid[ 1 ] * 33 ; $p < $showid[ 1 ] * 33  + 33 ; $p ++ ) {
             $id[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
             $formattedShowTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
         }
@@ -3526,7 +3526,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
 
         $PageNo = tr_num ( $showid[ 1 ] + 1 , 'fa' );
         $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        $telegram -> editMessageCaption ( [ 'chat_id' => $chat_id ,'message_id' => $message_id , 'reply_markup' => $keyb , 'text' => "کلیپ موردنظرتون رو انتخاب کنید - صفحه " . $PageNo ] );
+        $telegram -> editMessageCaption ( [ 'chat_id' => $chat_id ,'message_id' => $message_id , 'reply_markup' => $keyb , 'caption' => "کلیپ موردنظرتون رو انتخاب کنید - صفحه " . $PageNo ] );
     }
 }
 
