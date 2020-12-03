@@ -1405,21 +1405,8 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
             $serieID[] = $array2[ 'details' ][ 'list' ][ $p ][ 'id' ];
         }
         if ( is_numeric ( $vtsid ) == "1" ) {
-            if ( $tedadserie == 0 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 1 ) {
+            if ( $showid[ 1 ] == 1059 )
+            {
                 $option = [
                     [
                         $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
@@ -1430,302 +1417,336 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                     ] ,
                     [
                         $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        $telegram -> buildInlineKeyBoardButton ( "سفرهای هومن" , $url = '' , $switch_inline_query_current_chat = "سفرهای هومن" ) ,
                     ] ,
                 ];
             }
-            else if ( $tedadserie == 2 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
+            else
+            {
+                if ( $tedadserie == 0 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 1 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 2 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 3 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 4 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 5 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 6 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 7 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 8 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 9 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 10 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie == 11 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[10]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 10 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
+                else if ( $tedadserie >= 12 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[10]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 10 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[11]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 11 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
+                        ] ,
+                    ];
+                }
             }
-            else if ( $tedadserie == 3 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 4 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 5 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 6 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 7 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 8 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 9 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 10 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie == 11 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[10]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 10 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-            else if ( $tedadserie >= 12 ) {
-                $option = [
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/show/" . $showid[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "showdetail" ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $showid[ 1 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[9]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 9 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[10]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 10 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[11]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 11 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[6]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 6 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[7]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 7 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[8]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 8 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[3]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 3 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[4]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 4 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[5]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 5 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[1]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 1 ] ) ,
-                        $telegram -> buildInlineKeyBoardButton ( "$serieTitle[2]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 2 ] ) ,
-                    ] ,
-                    [
-                        $telegram -> buildInlineKeyBoardButton ( "ویدیوهای کوتاه" , $url = '' , $callback_data = "genres-vts" . $showid[ 1 ] ) ,
-                    ] ,
-                ];
-            }
-
         }
         else {
             if ( $tedadserie == 0 ) {
