@@ -1420,7 +1420,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
                         $telegram -> buildInlineKeyBoardButton ( "$serieTitle[0]" , $url = '' , $callback_data = "genres-Serielist" . $serieID[ 0 ] ) ,
                     ] ,
                     [
-                        $telegram -> buildInlineKeyBoardButton ( "سفرهای هومن" , $url = '' , $callback_data = "human" , $switch_inline_query_current_chat = "سفرهای هومن" ) ,
+                        $telegram -> buildInlineKeyBoardButton ( "سفرهای هومن" , $url = '' , $callback_data = "genres-vtshuman" ) ,
                     ] ,
                 ];
             }
@@ -2993,249 +2993,792 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
     }
     else if ( stristr ( $handler[ 1 ] , 'vts' ) == TRUE ) {
         $showid = explode ( 'vts' , $handler[ 1 ] );
-        $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videocliplist?id=" . $showid[ 1 ] ) , TRUE );
-        $episodecount = $array[ 'details' ][ 'list' ];
-        $countepisode = count ( $episodecount );
-        $EPTitle = [];
-        $EPID = [];
-        for ( $p = 0 ; $p < $countepisode ; $p ++ ) {
-            $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
-            $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
-        }
-        if ( $countepisode == 1 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                ] ,
-            ];
-        }
-        else if ( $countepisode == 2 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+        if ( $showid[ 1 ] == "human" )
+            {
+                $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videocliplist?id=1059" ) , TRUE );
+                $episodecount = $array[ 'details' ][ 'list' ];
+                $countepisode = count ( $episodecount );
+                $TedadPage = intdiv($countepisode,21);
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 3 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                $EPTitle = [];
+                $EPID = [];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 4 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                for ( $p = 0 ; $p < 21 ; $p ++ ) {
+                    $EPID[] = $array[ 'details' ][ 'list' ][ $NO ][ 'id' ];
+                    $EPTitle[] = $array[ 'details' ][ 'list' ][ $NO ][ 'videoclipTitle' ];
+                }
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 5 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                if ($TedadPage < 10)
+                {
+                    $TedadPage = $TedadPage +1 ;
+                    if ($TedadPage == 1)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 2)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 3)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 4)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 5)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 6)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۶" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR6') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 7)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۷" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR7') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۶" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR6') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 8)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۸" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR8' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۷" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR7') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۶" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR6') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
+                    else if ($TedadPage == 9)
+                    {
+                        $option = [
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                                $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۹" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR9') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۸" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR8' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۷" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR7') ,
+                                $telegram -> buildInlineKeyBoardButton ( "صفحه ۶" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR6') ,
+                            ] ,
+                            [
+                                $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                                $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                            ] ,
+                        ];
+                    }
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 6 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                }
+                else
+                {
+                    $TedadPage = "10";
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[2] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[2] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[1] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[1] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[0] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[0] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[5] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[5] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[4] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[4] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[3] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[3] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[8] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[8] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[7] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[7] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[6] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[6] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[11] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[11] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[10] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[10] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[9] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[9] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[14] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[14] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[13] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[13] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[12] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[12] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[17] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[17] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[16] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[16] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[15] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[15] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[20] . " " , $url = '' , $callback_data = 'genres-showsid'. $id[20] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[19] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[19] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $formattedShowTitle[18] . " " , $url = '' , $callback_data = 'genres-showsid' . $id[18] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۵" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR5') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۴" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR4') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۳" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR3') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۲" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR2') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۱" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR1' ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۱۰" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR10') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۹" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR9') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۸" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR8' ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۷" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR7') ,
+                            $telegram -> buildInlineKeyBoardButton ( "صفحه ۶" , $url = '' , $callback_data = 'genres-' . $gnr[ 0 ] . 'GNR6') ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( "بازگشت به منوی اصلی" , $url = '' , $callback_data = 'startmenu' ) ,
+                            $telegram -> buildInlineKeyBoardButton ( "ژانرها" , $url = '' , $callback_data = 'genres-menu' ) ,
+                        ] ,
+                    ];
+                }
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 7 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                $PageNo = tr_num ( $gnr[ 1 ] , 'fa' );
+                $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                $telegram -> editMessageText ( [ 'chat_id' => $chat_id , 'message_id' => $callbackmessage_id , 'reply_markup' => $keyb , 'text' => "برنامه موردنظرتون رو انتخاب کنید - صفحه " . $PageNo ] );
+                
+            }
+        else
+            {
+                $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videocliplist?id=" . $showid[ 1 ] ) , TRUE );
+                $episodecount = $array[ 'details' ][ 'list' ];
+                $countepisode = count ( $episodecount );
+                $EPTitle = [];
+                $EPID = [];
+                for ( $p = 0 ; $p < $countepisode ; $p ++ ) {
+                    $EPTitle[] = $array[ 'details' ][ 'list' ][ $p ][ 'videoclipTitle' ];
+                    $EPID[] = $array[ 'details' ][ 'list' ][ $p ][ 'id' ];
+                }
+                if ( $countepisode == 1 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                        ] ,
+                    ];
+                } else if ( $countepisode == 2 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 8 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 3 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 9 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 4 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 10 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 5 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode == 11 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 10 ] , $url = "" , $callback_data = "vts" . $EPID[ 10 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 6 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        else if ( $countepisode >= 12 ) {
-            $option = [
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 10 ] , $url = "" , $callback_data = "vts" . $EPID[ 10 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 11 ] , $url = "" , $callback_data = "vts" . $EPID[ 11 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
-                ] ,
-                [
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
-                    $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
-                ] ,
-            ];
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 7 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
 
-            $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        }
-        $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'reply_to_message_id' => $callbackmessage_id , 'reply_markup' => $keyb , "text" => "کلیپ موردنظر رو انتخاب کنید" ] );
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 8 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
+
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 9 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
+
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 10 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
+
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode == 11 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 10 ] , $url = "" , $callback_data = "vts" . $EPID[ 10 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
+
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                } else if ( $countepisode >= 12 ) {
+                    $option = [
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 10 ] , $url = "" , $callback_data = "vts" . $EPID[ 10 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 11 ] , $url = "" , $callback_data = "vts" . $EPID[ 11 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 8 ] , $url = "" , $callback_data = "vts" . $EPID[ 8 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 9 ] , $url = "" , $callback_data = "vts" . $EPID[ 9 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 6 ] , $url = "" , $callback_data = "vts" . $EPID[ 6 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 7 ] , $url = "" , $callback_data = "vts" . $EPID[ 7 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 4 ] , $url = "" , $callback_data = "vts" . $EPID[ 4 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 5 ] , $url = "" , $callback_data = "vts" . $EPID[ 5 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 2 ] , $url = "" , $callback_data = "vts" . $EPID[ 2 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 3 ] , $url = "" , $callback_data = "vts" . $EPID[ 3 ] ) ,
+                        ] ,
+                        [
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 0 ] , $url = "" , $callback_data = "vts" . $EPID[ 0 ] ) ,
+                            $telegram -> buildInlineKeyBoardButton ( $EPTitle[ 1 ] , $url = "" , $callback_data = "vts" . $EPID[ 1 ] ) ,
+                        ] ,
+                    ];
+
+                    $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                }
+                $keyb = $telegram -> buildInlineKeyBoard ( $option );
+                $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'reply_to_message_id' => $callbackmessage_id , 'reply_markup' => $keyb , "text" => "کلیپ موردنظر رو انتخاب کنید" ] );
+            }
     }
 }
 
