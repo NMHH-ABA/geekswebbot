@@ -4080,7 +4080,7 @@ else if ( $text == "vtsdetail" )
     $Description = ( "@BachehayeManotoBot\n" . '<b>' . $showTitle . '</b>' . "\n" . $Description );
 
     $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $message_id , 'parse_mode' => 'HTML' ] );
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$showShortDescription"]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$showid[ 1 ]"]);
 }
 
 else if ( stristr ( $text , 'series' ) == TRUE )
