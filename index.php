@@ -4116,7 +4116,7 @@ else if ( strstr ( $text , "vts" ) == TRUE ) {
     $videoM3u8Url = $array[ 'details' ][ 'videoM3u8Url' ];
     $showID = $array[ 'details' ][ 'showID' ];
     $Description = ( "@BachehayeManotoBot\n" . '<b>' . $formattedEpisodeTitle . '</b>' . "\n" . $videoclipDescription );
-    $Description=substr($Description,0,1000);
+    $Description=substr($Description,0,900);
     $Description = ( $Description . "..." );
 
     $option = [
