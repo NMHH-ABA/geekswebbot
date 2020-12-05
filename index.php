@@ -4069,7 +4069,7 @@ else if ( $text == "vtsdetail" )
 {
     $showid = explode ( "vtsdetail" , $text , 2 );
 
-    $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $showid[ 1 ] ) , TRUE );
+    $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videoclipdetails?id=" . $showid[ 1 ] ) , TRUE );
     $showTitle = $array[ 'details' ][ 'videoclipTitle' ];
     $showShortDescription = $array[ 'details' ][ 'videoclipDescription' ];
     $Description = strip_tags ( $showShortDescription );
@@ -4245,7 +4245,7 @@ else if ( strstr ( $text , "eps" ) == TRUE ) {
         }
 
         $keyb = $telegram -> buildInlineKeyBoard ( $option );
-        $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'reply_markup' => $keyb , 'photo' => $epiphoto , 'caption' => tr_num ( $Description , 'fa' ) , 'parse_mode' => 'markdown' ] );
+        $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'reply_markup' => $keyb , 'photo' => $epiphoto , 'reply_to_message_id' => $message_id , 'caption' => tr_num ( $Description , 'fa' ) , 'parse_mode' => 'markdown' ] );
         unlink ( "epiphoto.jpg" );
         if ( $sendhlsurl == "1" ) {
             $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $videoM3u8Url ] );
