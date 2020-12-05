@@ -4065,9 +4065,9 @@ else if ( $text == "showdetail" )
     #$telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $ImgIxUrl]);
     $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $callbackmessage_id , 'parse_mode' => 'HTML' ] );
 }
-else if ( $text == "vtsdetail" )
+else if ( $text == "vtdetail" )
 {
-    $showid = explode ( "vtsdetail" , $text , 2 );
+    $showid = explode ( "vtdetail" , $text , 2 );
 
     $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/videoclipdetails?id=" . $showid[ 1 ] ) , TRUE );
     $showTitle = $array[ 'details' ][ 'videoclipTitle' ];
@@ -4080,7 +4080,6 @@ else if ( $text == "vtsdetail" )
     $Description = ( "@BachehayeManotoBot\n" . '<b>' . $showTitle . '</b>' . "\n" . $Description );
 
     $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $message_id , 'parse_mode' => 'HTML' ] );
-    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$text"]);
 }
 
 else if ( stristr ( $text , 'series' ) == TRUE )
@@ -4140,7 +4139,7 @@ else if ( strstr ( $text , "vts" ) == TRUE ) {
             $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/clip/" . $episodeid[ 1 ] ) ,
         ] ,
         [
-            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "vtsdetail" . $episodeid[ 1 ] ) ,
+            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "vtdetail" . $episodeid[ 1 ] ) ,
             $telegram -> buildInlineKeyBoardButton ( 'دانلود' , $url = '' , $callback_data = "file=clip=" . $episodeid[ 1 ] ) ,
         ] ,
     ];
