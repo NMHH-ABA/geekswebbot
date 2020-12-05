@@ -4065,7 +4065,7 @@ else if ( $text == "showdetail" )
     #$telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $ImgIxUrl]);
     $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $callbackmessage_id , 'parse_mode' => 'HTML' ] );
 }
-else if ( $text == "vtdetail" )
+else if ( stristr ( $text , "vtdetail" ) == TRUE )
 {
     $showid = explode ( "vtdetail" , $text , 2 );
 
