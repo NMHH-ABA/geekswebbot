@@ -4129,7 +4129,7 @@ else if ( strstr ( $text , "vts" ) == TRUE ) {
 
     $keyb = $telegram -> buildInlineKeyBoard ( $option );
     $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'photo' => $ImgIxUrl , 'reply_markup' => $keyb , 'caption' => tr_num ( $Description , 'fa' ) , 'parse_mode' => 'HTML' ] );
-    #$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $videoM3u8Url]);
+    $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $ImgIxUrl]);
 }
 else if ( strstr ( $text , "com/clip/" ) == TRUE ) {
     $episodeid = explode ( "/clip/" , $text , 2 );
