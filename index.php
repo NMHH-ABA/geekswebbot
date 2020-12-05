@@ -2203,7 +2203,7 @@ else if ( stristr ( $text , 'genres' ) == TRUE )
         fclose ( $FileHandle );
         $sch2send = file_get_contents ( $FileName );
         if ( ( $countepisode > 0 ) == TRUE ) {
-            $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
+            $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $sch2send , 'reply_to_message_id' => $message_id , 'parse_mode' => 'Markdown' , 'disable_web_page_preview' => "true" ] );
             unlink ( $FileName );
         }
         else {
@@ -4065,6 +4065,22 @@ else if ( $text == "showdetail" )
     #$telegram->sendPhoto(['chat_id' => $chat_id, 'photo' => $ImgIxUrl]);
     $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $callbackmessage_id , 'parse_mode' => 'HTML' ] );
 }
+else if ( $text == "vtsdetail" )
+{
+    $showid = explode ( "vtsdetail" , $text , 2 );
+
+    $array = json_decode ( file_get_contents ( "https://dak1vd5vmi7x6.cloudfront.net/api/v1/publicrole/showmodule/details?id=" . $showid[ 1 ] ) , TRUE );
+    $showTitle = $array[ 'details' ][ 'videoclipTitle' ];
+    $showShortDescription = $array[ 'details' ][ 'videoclipDescription' ];
+    $Description = strip_tags ( $showShortDescription );
+    $Description = str_replace ( "&laquo;" , " " , $Description );
+    $Description = str_replace ( "&zwnj;" , " " , $Description );
+    $Description = str_replace ( "&raquo;" , " " , $Description );
+    $Description = str_replace ( "&nbsp;" , " " , $Description );
+    $Description = ( "@BachehayeManotoBot\n" . '<b>' . $showTitle . '</b>' . "\n" . $Description );
+
+    $telegram -> sendMessage ( [ 'chat_id' => $chat_id , 'text' => $Description , 'reply_to_message_id' => $message_id , 'parse_mode' => 'HTML' ] );
+}
 
 else if ( stristr ( $text , 'series' ) == TRUE )
 {
@@ -4115,9 +4131,7 @@ else if ( strstr ( $text , "vts" ) == TRUE ) {
     $ImgIxUrl = $array[ 'details' ][ 'videoCliplandscapeImgIxUrl' ];
     $videoM3u8Url = $array[ 'details' ][ 'videoM3u8Url' ];
     $showID = $array[ 'details' ][ 'showID' ];
-    $Description = ( "@BachehayeManotoBot\n" . '<b>' . $formattedEpisodeTitle . '</b>' . "\n" . $videoclipDescription );
-    $Description=substr($Description,0,900);
-    $Description = ( $Description . "..." );
+    $Description = ( "@BachehayeManotoBot\n" . '<b>' . $formattedEpisodeTitle . '</b>' );
 
     $option = [
         [
@@ -4125,12 +4139,13 @@ else if ( strstr ( $text , "vts" ) == TRUE ) {
             $telegram -> buildInlineKeyBoardButton ( "دیدن در سایت" , $url = "https://www.manototv.com/clip/" . $episodeid[ 1 ] ) ,
         ] ,
         [
+            $telegram -> buildInlineKeyBoardButton ( 'توضیحات' , $url = '' , $callback_data = "vtsdetail" . $episodeid[ 1 ] ) ,
             $telegram -> buildInlineKeyBoardButton ( 'دانلود' , $url = '' , $callback_data = "file=clip=" . $episodeid[ 1 ] ) ,
         ] ,
     ];
 
     $keyb = $telegram -> buildInlineKeyBoard ( $option );
-    $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'photo' => $ImgIxUrl , 'reply_markup' => $keyb , 'caption' => tr_num ( $Description , 'fa' ) , 'parse_mode' => 'HTML' ] );
+    $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'photo' => $ImgIxUrl , 'reply_markup' => $keyb , 'reply_to_message_id' => $message_id , 'caption' => tr_num ( $Description , 'fa' ) , 'parse_mode' => 'HTML' ] );
     #$telegram->sendMessage(['chat_id' => $chat_id, 'text' => $videoM3u8Url]);
 }
 else if ( strstr ( $text , "com/clip/" ) == TRUE ) {
@@ -4382,7 +4397,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
     $mifa1 = tr_num ( $HI1[ 1 ] , 'fa' );
 
     if ( $status == "1" ) {
-        $scheduleCaption0 = "زمان پخش     " . $showon[ 2 ] . " " . $showon[ 1 ] . " " . $showon[ 0 ] . "   -   " . $mifa0 . " : " . $hofa0 . "\n" . $scheduleshowTitle0 . "\nS" . $scheduleseasonNumber0 . "     E" . $scheduleepisodeNumber0 . "\nhttps://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber0 . ".m3u8";
+        $scheduleCaption0 = "زمان پخش     " . $showon[ 2 ] . " " . $showon[ 1 ] . " " . $showon[ 0 ] . "   -   " . $mifa0 . " : " . $hofa0 . "\n" . $scheduleshowTitle0 . "\nS" . $scheduleseasonNumber0 . "     E" . $scheduleepisodeNumber0 . "\nhttps://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber0 . ".m3u8" . "\n" . '/eps' . "$scheduleepisodeID0";
 
         $option0 = [
             [
@@ -4394,6 +4409,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
                 $telegram -> buildInlineKeyBoardButton ( "توضیحات قسمت" , $url = '' , $callback_data = "episodedetail" ) ,
             ] ,
             [
+                $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $scheduleshowID0 ) ,
                 $telegram -> buildInlineKeyBoardButton ( 'صفحه برنامه' , $url = '' , $callback_data = 'genres-showsid' . $scheduleshowID0 ) ,
             ] ,
         ];
@@ -4401,7 +4417,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
         $keyb0 = $telegram -> buildInlineKeyBoard ( $option0 );
         $telegram -> sendPhoto ( [ 'chat_id' => $chat_id , 'reply_markup' => $keyb0 , 'photo' => $scheduleportraitImgIxUrl0 , 'caption' => $scheduleCaption0 ] );
 
-        $scheduleCaption1 = "پخش شده در     " . $showon[ 2 ] . " " . $showon[ 1 ] . " " . $showon[ 0 ] . "   -   " . $mifa1 . " : " . $hofa1 . "\n" . $scheduleshowTitle1 . "\nS" . $scheduleseasonNumber1 . "     E" . $scheduleepisodeNumber1 . "\nhttps://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber1 . ".m3u8";
+        $scheduleCaption1 = "پخش شده در     " . $showon[ 2 ] . " " . $showon[ 1 ] . " " . $showon[ 0 ] . "   -   " . $mifa1 . " : " . $hofa1 . "\n" . $scheduleshowTitle1 . "\nS" . $scheduleseasonNumber1 . "     E" . $scheduleepisodeNumber1 . "\nhttps://d2rwmwucnr0d10.cloudfront.net/vod/" . $schedulecurrentHouseNumber1 . ".m3u8" . "\n" . '/eps' . "$scheduleepisodeID1";
 
         $option1 = [
             [
@@ -4413,6 +4429,7 @@ else if ( strstr ( $text , '-' ) == TRUE ) {
                 $telegram -> buildInlineKeyBoardButton ( "توضیحات قسمت" , $url = '' , $callback_data = "episodedetail" ) ,
             ] ,
             [
+                $telegram -> buildInlineKeyBoardButton ( 'ساعت های پخش و تکرار' , $url = '' , $callback_data = "genres-repeatontv" . $scheduleshowID1 ) ,
                 $telegram -> buildInlineKeyBoardButton ( 'صفحه برنامه' , $url = '' , $callback_data = 'genres-showsid' . $scheduleshowID1 ) ,
             ] ,
 
