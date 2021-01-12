@@ -2,7 +2,7 @@
 #include 'vendor/autoload.php'; #for heroku deploy
 include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
-date_default_timezone_set ( "asia/tehran" );
+#date_default_timezone_set ( "asia/tehran" );
 // Set the bot TOKEN
 $bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
 #$bot_id = "1279873723:AAEjyOf7og7FWiK0IAXJ9vyPqqwItv-6HEs"; #manotoapi_bot
