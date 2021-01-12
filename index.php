@@ -2,7 +2,7 @@
 #include 'vendor/autoload.php'; #for heroku deploy
 include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
-#date_default_timezone_set ( "asia/tehran" );
+date_default_timezone_set ( "asia/tehran" );
 // Set the bot TOKEN
 $bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
 #$bot_id = "1279873723:AAEjyOf7og7FWiK0IAXJ9vyPqqwItv-6HEs"; #manotoapi_bot
@@ -373,7 +373,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $Parts0 = explode ( '-' , $Day0 , 3 );
         $TimeStamp0 = mktime ( 0 , 0 , 0 , $Parts0[ 1 ] , $Parts0[ 2 ] , $Parts0[ 0 ] );
         $dayharfi0 = jgetdate ( $TimeStamp0 );
-        $dateharfi0 = tr_num ( ( $dayharfi0[ weekday ] . " " . $dayharfi0[ mday ] . " " . $dayharfi0[ month ] . " " . $dayharfi0[ year ] ) , 'fa' );
+        $dateharfi0 = tr_num ( ( $dayharfi0[ mday ] . " " . $dayharfi0[ month ] . " " . $dayharfi0[ year ] ) , 'fa' );
 
         $day1 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day1 , date_interval_create_from_date_string ( "0 days" ) );
