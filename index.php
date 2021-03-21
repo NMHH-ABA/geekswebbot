@@ -367,7 +367,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
     $handler = explode ( "-" , $text , 2 );
     if ( $handler[ 1 ] == "menu" )
     {
-        $day0 = date ( "Y-m-d"  );
+        $day0 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day0 , date_interval_create_from_date_string ( "-1 days" ) );
         $Day0 = date_format ( $day0 , "Y-m-d" );
         $Parts0 = explode ( '-' , $Day0 , 3 );
@@ -375,7 +375,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi0 = jgetdate ( $TimeStamp0 );
         $dateharfi0 = tr_num ( ( $dayharfi0[ weekday ] . " " . $dayharfi0[ mday ] . " " . $dayharfi0[ month ] . " " . $dayharfi0[ year ] ) , 'fa' );
 
-        $day1 = date ( "Y-m-d" );
+        $day1 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day1 , date_interval_create_from_date_string ( "0 days" ) );
         $Day1 = date_format ( $day1 , "Y-m-d" );
         $Parts1 = explode ( '-' , $Day1 , 3 );
@@ -384,7 +384,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dateharfi1 = tr_num ( ( $dayharfi1[ weekday ] . " " . $dayharfi1[ mday ] . " " . $dayharfi1[ month ] . " " . $dayharfi1[ year ] ) , 'fa' );
         $dayfa1 = $dayharfi1[ year ] . "-" . $dayharfi1[ mon ] . "-" . $dayharfi1[ mday ];
 
-        $day2 = date ( "Y-m-d" ) ;
+        $day2 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day2 , date_interval_create_from_date_string ( "1 days" ) );
         $Day2 = date_format ( $day2 , "Y-m-d" );
         $Parts2 = explode ( '-' , $Day2 , 3 );
@@ -392,7 +392,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi2 = jgetdate ( $TimeStamp2 );
         $dateharfi2 = tr_num ( ( $dayharfi2[ weekday ] . " " . $dayharfi2[ mday ] . " " . $dayharfi2[ month ] . " " . $dayharfi2[ year ] ) , 'fa' );
 
-        $day3 =  date ( "Y-m-d" );
+        $day3 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day3 , date_interval_create_from_date_string ( "2 days" ) );
         $Day3 = date_format ( $day3 , "Y-m-d" );
         $Parts3 = explode ( '-' , $Day3 , 3 );
@@ -400,7 +400,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi3 = jgetdate ( $TimeStamp3 );
         $dateharfi3 = tr_num ( ( $dayharfi3[ weekday ] . " " . $dayharfi3[ mday ] . " " . $dayharfi3[ month ] . " " . $dayharfi3[ year ] ) , 'fa' );
 
-        $day4 =  date ( "Y-m-d"  );
+        $day4 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day4 , date_interval_create_from_date_string ( "3 days" ) );
         $Day4 = date_format ( $day4 , "Y-m-d" );
         $Parts4 = explode ( '-' , $Day4 , 3 );
@@ -408,7 +408,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi4 = jgetdate ( $TimeStamp4 );
         $dateharfi4 = tr_num ( ( $dayharfi4[ weekday ] . " " . $dayharfi4[ mday ] . " " . $dayharfi4[ month ] . " " . $dayharfi4[ year ] ) , 'fa' );
 
-        $day5 =  date ( "Y-m-d"  );
+        $day5 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day5 , date_interval_create_from_date_string ( "4 days" ) );
         $Day5 = date_format ( $day5 , "Y-m-d" );
         $Parts5 = explode ( '-' , $Day5 , 3 );
@@ -416,7 +416,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi5 = jgetdate ( $TimeStamp5 );
         $dateharfi5 = tr_num ( ( $dayharfi5[ weekday ] . " " . $dayharfi5[ mday ] . " " . $dayharfi5[ month ] . " " . $dayharfi5[ year ] ) , 'fa' );
 
-        $day6 =  date ( "Y-m-d" );
+        $day6 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day6 , date_interval_create_from_date_string ( "5 days" ) );
         $Day6 = date_format ( $day6 , "Y-m-d" );
         $Parts6 = explode ( '-' , $Day6 , 3 );
@@ -424,7 +424,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi6 = jgetdate ( $TimeStamp6 );
         $dateharfi6 = tr_num ( ( $dayharfi6[ weekday ] . " " . $dayharfi6[ mday ] . " " . $dayharfi6[ month ] . " " . $dayharfi6[ year ] ) , 'fa' );
 
-        $day7 =  date ( "Y-m-d" );
+        $day7 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day7 , date_interval_create_from_date_string ( "6 days" ) );
         $Day7 = date_format ( $day7 , "Y-m-d" );
         $Parts7 = explode ( '-' , $Day7 , 3 );
@@ -432,7 +432,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $dayharfi7 = jgetdate ( $TimeStamp7 );
         $dateharfi7 = tr_num ( ( $dayharfi7[ weekday ] . " " . $dayharfi7[ mday ] . " " . $dayharfi7[ month ] . " " . $dayharfi7[ year ] ) , 'fa' );
 
-        $day8 =  date ( "Y-m-d" );
+        $day8 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day8 , date_interval_create_from_date_string ( "7 days" ) );
         $Day8 = date_format ( $day8 , "Y-m-d" );
         $Parts8 = explode ( '-' , $Day8 , 3 );
