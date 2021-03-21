@@ -374,7 +374,7 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $TimeStamp0 = mktime ( 0 , 0 , 0 , $Parts0[ 1 ] , $Parts0[ 2 ] , $Parts0[ 0 ] );
         $dayharfi0 = jgetdate ( $TimeStamp0 );
         $dateharfi0 = tr_num ( ( $dayharfi0[ weekday ] . " " . $dayharfi0[ mday ] . " " . $dayharfi0[ month ] . " " . $dayharfi0[ year ] ) , 'fa' );
-        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$dateharfi0"]);
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$dayharfi0"]);
 
 
         $day1 = date_create ( date ( "Y-m-d" ) );
