@@ -374,7 +374,18 @@ else if ( stristr ( $text , 'days' ) == TRUE )
         $TimeStamp0 = mktime ( 0 , 0 , 0 , $Parts0[ 1 ] , $Parts0[ 2 ] , $Parts0[ 0 ] );
         $dayharfi0 = jgetdate ( $TimeStamp0 );
         $dateharfi0 = tr_num ( ( $dayharfi0[ weekday ] . " " . $dayharfi0[ mday ] . " " . $dayharfi0[ month ] . " " . $dayharfi0[ year ] ) , 'fa' );
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$dateharfi0"]);
 
+        $day01 = date_create ( date ( "Y-m-d" ) );
+        date_add ( $day01 , date_interval_create_from_date_string ( "-1 days" ) );
+        $Day01 = date_format ( $day01 , "Y-m-d" );
+        $Parts01 = explode ( '-' , $Day01 , 3 );
+        $TimeStamp01 = mktime ( 0 , 0 , 0 , $Parts01[ 1 ] , $Parts01[ 2 ] , $Parts01[ 0 ] );
+        $dayharfi01 = getdate ( $TimeStamp01 );
+        $dateharfi01 = ( $dayharfi01[ weekday ] . " " . $dayharfi01[ mday ] . " " . $dayharfi01[ month ] . " " . $dayharfi01[ year ] );
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => "$dateharfi01"]);
+        
+        
         $day1 = date_create ( date ( "Y-m-d" ) );
         date_add ( $day1 , date_interval_create_from_date_string ( "0 days" ) );
         $Day1 = date_format ( $day1 , "Y-m-d" );
