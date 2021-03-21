@@ -4,11 +4,11 @@ include 'vendor/Telegram.php';
 include_once 'vendor/jdf.php';
 date_default_timezone_set ( "asia/tehran" );
 // Set the bot TOKEN
-$bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
+#$bot_id = "821293043:AAHge0iPAcuwYJmxtgJ9RLbz65_T_H1usns"; #manotoapibot
 #$bot_id = "1279873723:AAEjyOf7og7FWiK0IAXJ9vyPqqwItv-6HEs"; #manotoapi_bot
-#$bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg"; #BachehayeManotoBot
+$bot_id = "69707027:AAEBGJPfjZHaY1320czxkd6_9-BYVK6-ggg"; #BachehayeManotoBot
 
-$sendhlsurl = "1";
+$sendhlsurl = "0";
 
 // Instances the class
 $telegram = new Telegram( $bot_id );
